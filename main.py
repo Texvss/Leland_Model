@@ -52,9 +52,9 @@ def main():
     print("✓ SIMULATION COMPLETE!")
     print("="*70)
     print("\nNext steps:")
-    print("  1. Open 'visualization.ipynb' in PyCharm/Jupyter")
-    print("  2. Run all cells to see visualizations")
-    print("  3. Check 'results_summary.csv' for exported data")
+    # print("  1. Open 'visualization' in PyCharm/Jupyter")
+    print("  1. Run all cells to see visualizations")
+    print("  2. Check 'results_summary.csv' for exported data")
     print("\n" + "="*70 + "\n")
 
     return abm_results, mc_results

@@ -66,6 +66,20 @@ def analyze_abm_results(results):
     else:
         print(f"  Extra cost:     ${-tc_diff:.2f}")
 
+    # Option Traders results
+    if 'option_traders' in results:
+        print(f"\nOption Traders (Buyers):")
+        print(f"  {'Strategy':<20} {'Final P&L':<15} {'Premium Paid':<15}")
+        print("-"*70)
+
+        for strategy in ['BlackScholes', 'Leland']:
+            data = results['option_traders'][strategy]
+            print(f"  {strategy:<20} ${data['final_pnl']:>8.2f}      "
+                  f"${data['premium_paid']:>8.2f}")
+
+        print("-"*70)
+        print("  Note: OptionTraders hold to expiration (no hedging)")
+
     print("="*70 + "\n")
 
 

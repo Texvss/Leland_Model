@@ -86,6 +86,7 @@ class Config:
         print(f"    - High aggr.:      {self.n_fundamentalist_high} (a={self.aggressiveness_high})")
         print(f"  NoiseTraders:        {self.n_noise_traders}")
         print(f"  MarketMakers:        2 (BS + Leland)")
+        print(f"  OptionTraders:       2 (counterparties to MMs)")
 
         print(f"\nMonte Carlo:")
         print(f"  Simulations:         {self.mc_simulations:,}")
