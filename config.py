@@ -23,7 +23,7 @@ class Config:
     risk_free_rate: float = 0.05
 
     # ===== TRANSACTION COSTS =====
-    k_transaction: float = 0.01  # 1%
+    k_transaction: float = 0.02  # 2% (higher costs = more room for optimization)
 
     # ===== REBALANCING =====
     # ВАЖНО: Не каждый день!

@@ -30,9 +30,16 @@ def print_header(title: str):
     print("="*80)
 
 
-def calibrate_all_strategies(config):
+def calibrate_all_strategies(config, market_volatility):
     """
     Step 1: Calibrate both Optimized and ML-Calibrated Leland
+
+    Parameters:
+    -----------
+    config : Config
+        Project configuration
+    market_volatility : float
+        Actual market volatility from AAPL data
 
     Returns:
     --------
@@ -41,23 +48,33 @@ def calibrate_all_strategies(config):
     """
     print_header("STEP 1: CALIBRATING BOTH STRATEGIES")
 
-    # Parameters for calibration
+    # Parameters for calibration (using REAL market volatility!)
     S0 = 100.0
     K = 100.0
     T = config.time_to_maturity
     r = config.risk_free_rate
-    sigma = 0.25  # Typical volatility
+    sigma = market_volatility  # Use actual market volatility from AAPL!
     k = config.k_transaction
     dt = 1 / config.mc_steps_per_year
+
+    print(f"\n⚠️  IMPORTANT: Calibrating with REAL market parameters:")
+    print(f"  Market volatility (σ):  {sigma:.4f} (from AAPL data)")
+    print(f"  Transaction cost (k):   {k:.4f}")
+    print(f"  Time step (dt):         {dt:.6f}")
+    print(f"  This ensures A parameters are optimal for the actual market conditions!")
 
     # 1A: Optimize A (Grid Search)
     print("\n" + "-"*80)
     print("1A. OPTIMIZED LELAND (Grid Search)")
     print("-"*80)
+
+    # Calculate Classical Leland A to focus grid around it
+    A_leland_est = (k / sigma) * np.sqrt(8 / (np.pi * dt))
+
     A_optimal, opt_results = optimize_A_parameter(
         S0, K, T, r, sigma, k, dt,
-        n_simulations=3000,
-        A_grid=np.linspace(0, 1.5, 16)
+        n_simulations=10000,  # Increased from 3000 for stability
+        A_grid=np.linspace(max(0, A_leland_est - 0.3), A_leland_est + 0.3, 31)  # Finer grid around Leland
     )
 
     # 1B: ML-Calibrated A (Bayesian Optimization)
@@ -66,9 +83,9 @@ def calibrate_all_strategies(config):
     print("-"*80)
     A_ml, ml_results = optimize_A_with_ML(
         S0, K, T, r, sigma, k, dt,
-        n_initial=10,
-        n_iterations=20,
-        n_simulations_per_eval=1000,
+        n_initial=15,          # Increased from 10 for better exploration
+        n_iterations=30,       # Increased from 20 for better convergence
+        n_simulations_per_eval=5000,  # Increased from 1000 for stable estimates!
         acquisition='ei'
     )
 
@@ -84,24 +101,27 @@ def calibrate_all_strategies(config):
     return A_optimal, A_ml
 
 
-def run_abm_all_strategies(config, A_optimal, A_ml):
+def run_abm_all_strategies(config, market_data, A_optimal, A_ml):
     """
     Step 2: Run ABM with all 4 strategies
+
+    Parameters:
+    -----------
+    config : Config
+        Project configuration
+    market_data : dict
+        Pre-downloaded market data (to avoid downloading twice)
+    A_optimal : float
+        Optimized Leland A parameter
+    A_ml : float
+        ML-Calibrated Leland A parameter
 
     Returns:
     --------
     abm_results : dict
-    market_data : dict
+        ABM simulation results
     """
     print_header("STEP 2: ABM WITH ALL 4 STRATEGIES (REAL DATA)")
-
-    # Download market data
-    print(f"\nDownloading {config.ticker} data...")
-    market_data = download_market_data(
-        config.ticker,
-        config.start_date,
-        config.end_date
-    )
 
     # Create and run ABM with BOTH Optimized and ML strategies
     model = ABMModel(config, market_data, A_optimal=A_optimal, A_ml=A_ml)
@@ -116,7 +136,7 @@ def run_abm_all_strategies(config, A_optimal, A_ml):
     print("-"*80)
     analyze_abm_results(abm_results)
 
-    return abm_results, market_data
+    return abm_results
 
 
 def run_monte_carlo_all_strategies(config, initial_price, strike, volatility, A_optimal, A_ml):
@@ -325,16 +345,28 @@ def main():
     # Display configuration
     config.display()
 
-    # Step 1: Calibrate both Optimized and ML-Calibrated Leland
-    A_optimal, A_ml = calibrate_all_strategies(config)
+    # Step 0: Download market data FIRST to get real volatility
+    print_header("STEP 0: DOWNLOADING MARKET DATA")
+    print(f"\nDownloading {config.ticker} data to extract market parameters...")
+    market_data = download_market_data(
+        config.ticker,
+        config.start_date,
+        config.end_date
+    )
+    market_volatility = market_data['volatility']
+    print(f"\n✓ Market volatility extracted: σ = {market_volatility:.4f}")
+    print(f"  This will be used for calibration to ensure A parameters are optimal!")
 
-    # Step 2: Run ABM with all 4 strategies
-    abm_results, market_data = run_abm_all_strategies(config, A_optimal, A_ml)
+    # Step 1: Calibrate both Optimized and ML-Calibrated Leland (using real volatility!)
+    A_optimal, A_ml = calibrate_all_strategies(config, market_volatility)
 
-    # Step 3: Run Monte Carlo with all 4 strategies
+    # Step 2: Run ABM with all 4 strategies (using same market data)
+    abm_results = run_abm_all_strategies(config, market_data, A_optimal, A_ml)
+
+    # Step 3: Run Monte Carlo with all 4 strategies (using same volatility)
     initial_price = market_data['prices'][0]
     strike = abm_results['strike']
-    volatility = market_data['volatility']
+    volatility = market_data['volatility']  # Same volatility used in calibration!
 
     mc_results = run_monte_carlo_all_strategies(
         config, initial_price, strike, volatility, A_optimal, A_ml

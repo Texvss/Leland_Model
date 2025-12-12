@@ -13,7 +13,6 @@ Tests on Monte Carlo simulations (not ABM, for statistical comparison)
 """
 
 import numpy as np
-import matplotlib.pyplot as plt
 from config import Config
 from optimization import optimize_A_parameter, simulate_hedging_with_A
 from ml_optimization import optimize_A_with_ML, simulate_hedging_with_A_ml
@@ -196,125 +195,6 @@ def test_hypothesis_H2(results: dict):
     return hypothesis_confirmed
 
 
-def visualize_comparison(results: dict, save_path: str = None):
-    """
-    Create comprehensive visualization of all 4 strategies
-
-    Parameters:
-    -----------
-    results : dict
-        Results from run_monte_carlo_comparison
-    save_path : str, optional
-        Path to save figure
-    """
-    fig, axes = plt.subplots(2, 3, figsize=(18, 10))
-    fig.suptitle('ML-Calibrated Leland: 4-Strategy Comparison',
-                 fontsize=16, fontweight='bold')
-
-    strategies = ['BlackScholes', 'ClassicalLeland', 'OptimizedLeland', 'MLCalibratedLeland']
-    colors = ['blue', 'orange', 'green', 'red']
-    labels = ['Black-Scholes', 'Classical Leland', 'Optimized Leland', 'ML-Calibrated']
-
-    # Plot 1: Distribution of hedging errors
-    ax = axes[0, 0]
-    for strategy, color, label in zip(strategies, colors, labels):
-        ax.hist(results[strategy]['errors'], bins=50, alpha=0.4,
-                color=color, label=label, density=True)
-    ax.set_xlabel('Hedging Error ($)', fontsize=10)
-    ax.set_ylabel('Density', fontsize=10)
-    ax.set_title('Distribution of Hedging Errors', fontsize=12, fontweight='bold')
-    ax.legend(fontsize=8)
-    ax.grid(True, alpha=0.3)
-    ax.axvline(0, color='black', linestyle='--', linewidth=1, alpha=0.5)
-
-    # Plot 2: Mean errors
-    ax = axes[0, 1]
-    means = [results[s]['mean_error'] for s in strategies]
-    bars = ax.bar(labels, means, color=colors, alpha=0.7)
-    ax.set_ylabel('Mean Hedging Error ($)', fontsize=10)
-    ax.set_title('Mean Errors (Bias)', fontsize=12, fontweight='bold')
-    ax.axhline(0, color='black', linestyle='-', linewidth=0.5)
-    ax.grid(True, alpha=0.3, axis='y')
-    plt.setp(ax.xaxis.get_majorticklabels(), rotation=45, ha='right', fontsize=8)
-
-    # Add values on bars
-    for bar, val in zip(bars, means):
-        height = bar.get_height()
-        ax.text(bar.get_x() + bar.get_width()/2., height,
-                f'${val:.3f}', ha='center', va='bottom', fontsize=8)
-
-    # Plot 3: Std errors (H2 TEST!)
-    ax = axes[0, 2]
-    stds = [results[s]['std_error'] for s in strategies]
-    bars = ax.bar(labels, stds, color=colors, alpha=0.7)
-    ax.set_ylabel('Std Dev of Hedging Error ($)', fontsize=10)
-    ax.set_title('Standard Deviations (H2 Test!)', fontsize=12, fontweight='bold')
-    ax.grid(True, alpha=0.3, axis='y')
-    plt.setp(ax.xaxis.get_majorticklabels(), rotation=45, ha='right', fontsize=8)
-
-    # Highlight ML as best
-    ml_idx = strategies.index('MLCalibratedLeland')
-    bars[ml_idx].set_edgecolor('red')
-    bars[ml_idx].set_linewidth(3)
-
-    # Add values on bars
-    for bar, val in zip(bars, stds):
-        height = bar.get_height()
-        ax.text(bar.get_x() + bar.get_width()/2., height,
-                f'${val:.3f}', ha='center', va='bottom', fontsize=8)
-
-    # Plot 4: Transaction costs
-    ax = axes[1, 0]
-    tcs = [results[s]['mean_tc'] for s in strategies]
-    bars = ax.bar(labels, tcs, color=colors, alpha=0.7)
-    ax.set_ylabel('Mean Transaction Cost ($)', fontsize=10)
-    ax.set_title('Average Transaction Costs', fontsize=12, fontweight='bold')
-    ax.grid(True, alpha=0.3, axis='y')
-    plt.setp(ax.xaxis.get_majorticklabels(), rotation=45, ha='right', fontsize=8)
-
-    for bar, val in zip(bars, tcs):
-        height = bar.get_height()
-        ax.text(bar.get_x() + bar.get_width()/2., height,
-                f'${val:.2f}', ha='center', va='bottom', fontsize=8)
-
-    # Plot 5: Risk-Return scatter
-    ax = axes[1, 1]
-    for strategy, color, label in zip(strategies, colors, labels):
-        ax.scatter(results[strategy]['std_error'],
-                  results[strategy]['mean_error'],
-                  s=200, color=color, label=label, alpha=0.7)
-    ax.set_xlabel('Std Dev (Risk)', fontsize=10)
-    ax.set_ylabel('Mean Error (Return)', fontsize=10)
-    ax.set_title('Risk-Return Tradeoff', fontsize=12, fontweight='bold')
-    ax.legend(fontsize=8)
-    ax.grid(True, alpha=0.3)
-    ax.axhline(0, color='black', linestyle='--', linewidth=0.5)
-    ax.axvline(min(stds), color='red', linestyle='--', linewidth=1, alpha=0.3,
-               label='Best Std')
-
-    # Plot 6: A parameter values
-    ax = axes[1, 2]
-    A_values = [results['A_values'][s] for s in strategies]
-    bars = ax.bar(labels, A_values, color=colors, alpha=0.7)
-    ax.set_ylabel('A Parameter Value', fontsize=10)
-    ax.set_title('Volatility Adjustment Parameters', fontsize=12, fontweight='bold')
-    ax.grid(True, alpha=0.3, axis='y')
-    plt.setp(ax.xaxis.get_majorticklabels(), rotation=45, ha='right', fontsize=8)
-
-    for bar, val in zip(bars, A_values):
-        height = bar.get_height()
-        ax.text(bar.get_x() + bar.get_width()/2., height,
-                f'{val:.4f}', ha='center', va='bottom', fontsize=8)
-
-    plt.tight_layout()
-
-    if save_path:
-        plt.savefig(save_path, dpi=150, bbox_inches='tight')
-        print(f"✓ Visualization saved to {save_path}")
-
-    plt.show()
-
-
 def print_summary_table(results: dict):
     """Print summary table of all strategies"""
     print(f"\n{'='*70}")
@@ -386,9 +266,6 @@ def main():
     print_summary_table(mc_results)
     hypothesis_confirmed = test_hypothesis_H2(mc_results)
 
-    # STEP 5: Visualize
-    visualize_comparison(mc_results, save_path='ml_leland_comparison.png')
-
     # Final summary
     print(f"\n{'='*70}")
     print("                    FINAL SUMMARY")
@@ -400,6 +277,9 @@ def main():
     print(f"{'='*70}\n")
 
     print("✓ ALL TESTS COMPLETE!")
+    print("\nNext steps:")
+    print("  1. Visualization handled by team member")
+    print("  2. Run sensitivity_analysis.py for H3 testing")
 
 
 if __name__ == "__main__":

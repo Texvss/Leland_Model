@@ -54,9 +54,6 @@ def compare_three_strategies(config: Config):
         A_grid=np.linspace(0, 1.5, 16)
     )
 
-    # Plot optimization
-    plot_optimization_results(opt_results, save_path='optimization_A_results.png')
-
     # ===== STEP 2: COMPARE STRATEGIES =====
     print(f"\n{'='*70}")
     print("STEP 2: COMPARING STRATEGIES ON TEST SET")
@@ -175,57 +172,6 @@ def compare_three_strategies(config: Config):
     return results
 
 
-def plot_comparison(results: dict, save_path: str = 'strategy_comparison.png'):
-    """Plot comparison of three strategies"""
-    try:
-        import matplotlib.pyplot as plt
-    except ImportError:
-        print("Matplotlib not available")
-        return
-
-    fig, axes = plt.subplots(1, 2, figsize=(14, 5))
-
-    strategies = ['BlackScholes', 'ClassicalLeland', 'OptimizedLeland']
-    colors = ['blue', 'orange', 'green']
-    labels = ['Black-Scholes', 'Classical Leland', 'Optimized Leland']
-
-    # Plot 1: Error distributions
-    for strategy, color, label in zip(strategies, colors, labels):
-        errors = results[strategy]['errors']
-        axes[0].hist(errors, bins=50, alpha=0.5, color=color,
-                     label=f"{label} (σ={results[strategy]['std_error']:.3f})",
-                     density=True)
-
-    axes[0].axvline(0, color='black', linestyle='--', linewidth=1, alpha=0.7)
-    axes[0].set_xlabel('Hedging Error (P&L)', fontsize=12)
-    axes[0].set_ylabel('Density', fontsize=12)
-    axes[0].set_title('Distribution of Hedging Errors', fontsize=14, fontweight='bold')
-    axes[0].legend()
-    axes[0].grid(True, alpha=0.3)
-
-    # Plot 2: Risk-Return
-    means = [results[s]['mean_error'] for s in strategies]
-    stds = [results[s]['std_error'] for s in strategies]
-
-    for i, (mean, std, label, color) in enumerate(zip(means, stds, labels, colors)):
-        axes[1].scatter(std, mean, s=200, color=color, alpha=0.7,
-                        label=label, edgecolors='black', linewidth=2)
-        axes[1].annotate(label, (std, mean), xytext=(10, 10),
-                        textcoords='offset points', fontsize=10)
-
-    axes[1].axhline(0, color='black', linestyle='--', linewidth=1, alpha=0.5)
-    axes[1].set_xlabel('Risk (Std Dev of Error)', fontsize=12)
-    axes[1].set_ylabel('Return (Mean Error)', fontsize=12)
-    axes[1].set_title('Risk-Return Tradeoff', fontsize=14, fontweight='bold')
-    axes[1].grid(True, alpha=0.3)
-    axes[1].legend()
-
-    plt.tight_layout()
-    plt.savefig(save_path, dpi=150, bbox_inches='tight')
-    print(f"✓ Comparison plot saved to {save_path}")
-    plt.show()
-
-
 if __name__ == "__main__":
     from config import config
 
@@ -236,11 +182,7 @@ if __name__ == "__main__":
     # Run comparison
     results = compare_three_strategies(config)
 
-    # Plot
-    plot_comparison(results)
-
     print("\n✓ Test complete!")
     print("\nNext steps:")
-    print("  1. Check 'optimization_A_results.png' - optimization curve")
-    print("  2. Check 'strategy_comparison.png' - performance comparison")
-    print("  3. If H1 confirmed → use Optimized Leland in main ABM model")
+    print("  1. If H1 confirmed → use Optimized Leland in main ABM model")
+    print("  2. Visualization handled by team member")
