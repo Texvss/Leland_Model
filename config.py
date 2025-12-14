@@ -13,7 +13,7 @@ class Config:
     """Main configuration"""
 
     # ===== DATA PARAMETERS =====
-    ticker: str = "AAPL"
+    ticker: str = "TSLA"  # Stock ticker (TSLA has higher volatility than AAPL!)
     start_date: str = "2021-01-01"
     end_date: str = "2023-12-31"  # 2 ГОДА!
 
@@ -31,16 +31,16 @@ class Config:
 
     # ===== FUNDAMENTALIST PARAMETERS =====
     # 3 типа фундаменталистов с разной агрессивностью
-    n_fundamentalist_low: int = 3      # Консервативные
-    n_fundamentalist_medium: int = 3   # Средние
-    n_fundamentalist_high: int = 3     # Агрессивные
+    n_fundamentalist_low: int = 8      # Консервативные (increased for more realistic market)
+    n_fundamentalist_medium: int = 8   # Средние (increased for more realistic market)
+    n_fundamentalist_high: int = 8     # Агрессивные (increased for more realistic market)
 
     aggressiveness_low: float = 0.02    # Низкая агрессивность
     aggressiveness_medium: float = 0.05  # Средняя
     aggressiveness_high: float = 0.10    # Высокая
 
     # ===== NOISE TRADER PARAMETERS =====
-    n_noise_traders: int = 5
+    n_noise_traders: int = 20  # Increased from 5 for more realistic market dynamics
     noise_level: float = 1.0
 
     # ===== MONTE CARLO PARAMETERS =====

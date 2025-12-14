@@ -1,0 +1,1897 @@
+/Users/Admin/leland_abm_project/.venv/lib/python3.11/site-packages/sklearn/gaussian_process/_gpr.py:670: ConvergenceWarning: lbfgs failed to converge after 11 iteration(s) (status=2):
+ABNORMAL: 
+
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  _check_optimize_result("lbfgs", opt_res)
+/Users/Admin/leland_abm_project/.venv/lib/python3.11/site-packages/sklearn/gaussian_process/kernels.py:440: ConvergenceWarning: The optimal value found for dimension 0 of parameter k2__length_scale is close to the specified lower bound 1e-05. Decreasing the bound and calling fit again may find a better value.
+  warnings.warn(
+/Users/Admin/leland_abm_project/.venv/lib/python3.11/site-packages/sklearn/gaussian_process/_gpr.py:670: ConvergenceWarning: lbfgs failed to converge after 12 iteration(s) (status=2):
+ABNORMAL: 
+
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  _check_optimize_result("lbfgs", opt_res)
+/Users/Admin/leland_abm_project/.venv/lib/python3.11/site-packages/sklearn/gaussian_process/_gpr.py:670: ConvergenceWarning: lbfgs failed to converge after 5 iteration(s) (status=2):
+ABNORMAL: 
+
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  _check_optimize_result("lbfgs", opt_res)
+/Users/Admin/leland_abm_project/.venv/lib/python3.11/site-packages/sklearn/gaussian_process/_gpr.py:670: ConvergenceWarning: lbfgs failed to converge after 6 iteration(s) (status=2):
+ABNORMAL: 
+
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  _check_optimize_result("lbfgs", opt_res)
+/Users/Admin/leland_abm_project/.venv/lib/python3.11/site-packages/sklearn/gaussian_process/_gpr.py:670: ConvergenceWarning: lbfgs failed to converge after 7 iteration(s) (status=2):
+ABNORMAL: 
+
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  _check_optimize_result("lbfgs", opt_res)
+
+================================================================================
+                    COMPLETE LELAND STRATEGY ANALYSIS
+               Multi-Run ABM + Adaptive Sensitivity
+================================================================================
+
+Tickers to analyze: AAPL
+ABM runs per ticker: 30
+
+================================================================================
+                         TICKER 1/1: AAPL
+================================================================================
+
+================================================================================
+                         ANALYZING: AAPL
+================================================================================
+
+--------------------------------------------------------------------------------
+PART 1: MULTI-RUN ABM ANALYSIS
+--------------------------------------------------------------------------------
+
+================================================================================
+                    MULTI-RUN ABM ANALYSIS: AAPL
+                         30 Monte Carlo Runs
+================================================================================
+
+================================================================================
+                            DOWNLOADING MARKET DATA
+================================================================================
+
+Ticker: AAPL
+Period: 2021-01-01 to 2023-12-31
+
+📊 Downloading AAPL data...
+   Period: 2021-01-01 to 2023-12-31
+✓ Downloaded 753 days
+   Price range: $113.44 - $196.26
+   Realized volatility: 27.75%
+   Realized drift: 13.90%
+
+
+✓ Market volatility: σ = 0.2775
+
+================================================================================
+                             CALIBRATING STRATEGIES
+================================================================================
+
+Calibrating with market parameters:
+  σ = 0.2775 (from AAPL data)
+  k = 0.0200
+  dt = 0.003968
+
+Optimizing Leland A (grid search)...
+
+======================================================================
+                    OPTIMIZING LELAND'S A PARAMETER
+======================================================================
+
+Parameters:
+  S0=100.00, K=100.00, T=1.00, σ=0.2775
+  k=0.0200, dt=0.003968
+  Simulations: 10,000
+  Testing A ∈ [1.526, 2.126] (31 points)
+
+Running optimization...
+  Progress: 5/31 | Current A=1.606, Std=0.8840
+  Progress: 10/31 | Current A=1.706, Std=0.8625
+  Progress: 15/31 | Current A=1.806, Std=0.8526
+  Progress: 20/31 | Current A=1.906, Std=0.8599
+  Progress: 25/31 | Current A=2.006, Std=0.8845
+  Progress: 30/31 | Current A=2.106, Std=0.9098
+  Progress: 31/31 | Current A=2.126, Std=0.9188
+
+======================================================================
+✓ OPTIMIZATION COMPLETE
+======================================================================
+
+  Optimal A*:          1.7656
+  Optimal Std Error:   0.8500
+  Mean Error:          -22.9787
+  Mean Trans. Cost:    8.7131
+
+  Classical Leland A:  1.8256
+  Classical Std Error: 0.8564
+  Improvement:         0.75%
+======================================================================
+
+
+Optimizing Leland A (Bayesian)...
+
+======================================================================
+               ML-CALIBRATED LELAND OPTIMIZATION
+                    (Bayesian Optimization + GP)
+======================================================================
+
+Parameters:
+  S0=100.00, K=100.00, T=1.00, σ=0.2775
+  k=0.0200, dt=0.003968
+  Initial exploration: 15 points
+  BO iterations: 30
+  MC sims per eval: 5,000
+  Acquisition: EI
+
+  Classical Leland A: 1.8256
+
+Phase 1: Initial Random Exploration (15 points)...
+  1/15 | A=0.0985, Std=3.4713
+  2/15 | A=1.5354, Std=0.9108
+  3/15 | A=1.0923, Std=1.3275
+  4/15 | A=1.4886, Std=0.9236
+  5/15 | A=1.5369, Std=0.9035
+  6/15 | A=1.6963, Std=0.8704
+  7/15 | A=1.2218, Std=1.1286
+  8/15 | A=1.1568, Std=1.1831
+  9/15 | A=1.8729, Std=0.8555
+  10/15 | A=0.4964, Std=2.3184
+  11/15 | A=1.8819, Std=0.8516
+  12/15 | A=1.3487, Std=1.0402
+  13/15 | A=1.1206, Std=1.2716
+  14/15 | A=1.7988, Std=0.8498
+  15/15 | A=0.8765, Std=1.6111
+
+Phase 2: Bayesian Optimization (30 iterations)...
+  1/30 | A=1.6162, Std=0.8792 (Best so far: 0.8498)
+  2/30 | A=1.4141, Std=0.9974 (Best so far: 0.8498)
+  3/30 | A=1.7374, Std=0.8573 (Best so far: 0.8498)
+  4/30 | A=2.0000, Std=0.8726 (Best so far: 0.8498)
+  5/30 | A=0.7071, Std=1.9085 (Best so far: 0.8498)
+  6/30 | A=0.3030, Std=2.8546 (Best so far: 0.8498)
+  7/30 | A=1.9596, Std=0.8745 (Best so far: 0.8498)
+  8/30 | A=1.5758, Std=0.8876 (Best so far: 0.8498)
+  9/30 | A=1.2929, Std=1.0685 (Best so far: 0.8498)
+  10/30 | A=1.6566, Std=0.8583 (Best so far: 0.8498)
+  11/30 | A=1.4545, Std=0.9646 (Best so far: 0.8498)
+  12/30 | A=0.9899, Std=1.4441 (Best so far: 0.8498)
+  13/30 | A=0.6061, Std=2.1009 (Best so far: 0.8498)
+  14/30 | A=0.7879, Std=1.7646 (Best so far: 0.8498)
+  15/30 | A=0.0000, Std=3.8636 (Best so far: 0.8498)
+  16/30 | A=0.4040, Std=2.5861 (Best so far: 0.8498)
+  17/30 | A=1.7778, Std=0.8690 (Best so far: 0.8498)
+  18/30 | A=0.2020, Std=3.1689 (Best so far: 0.8498)
+  19/30 | A=1.9192, Std=0.8601 (Best so far: 0.8498)
+  20/30 | A=1.8182, Std=0.8389 (Best so far: 0.8389)
+  21/30 | A=0.0202, Std=3.8207 (Best so far: 0.8389)
+  22/30 | A=0.9293, Std=1.5363 (Best so far: 0.8389)
+  23/30 | A=1.8182, Std=0.8433 (Best so far: 0.8389)
+  24/30 | A=1.9798, Std=0.8761 (Best so far: 0.8389)
+  25/30 | A=0.5455, Std=2.2143 (Best so far: 0.8389)
+  26/30 | A=1.2525, Std=1.1106 (Best so far: 0.8389)
+  27/30 | A=1.0303, Std=1.3945 (Best so far: 0.8389)
+  28/30 | A=0.6667, Std=1.9715 (Best so far: 0.8389)
+  29/30 | A=1.8182, Std=0.8438 (Best so far: 0.8389)
+  30/30 | A=0.8283, Std=1.7003 (Best so far: 0.8389)
+
+======================================================================
+✓ ML OPTIMIZATION COMPLETE
+======================================================================
+
+  ML-Optimal A*:       1.8182
+  ML Std Error:        0.8389
+  Mean Error:          -22.9495
+  Total evaluations:   45
+
+  Classical Leland A:  1.8182
+  Classical Std Error: 0.8389
+  Improvement:         0.00%
+======================================================================
+
+
+✓ Calibration complete:
+  Classical Leland A:  1.8256
+  Optimized A*:        1.7656
+  ML-Calibrated A*_ml: 1.8182
+
+================================================================================
+                        MULTI-RUN ABM ANALYSIS (30 runs)
+================================================================================
+
+Configuration:
+  Ticker:           AAPL
+  Market Vol:       0.2775
+  Transaction Cost: 0.0200
+  Runs:             30
+  Optimized A*:     1.7656
+  ML A*_ml:         1.8182
+
+Running 30 ABM simulations...
+Progress: 
+✓ ABM Model created
+   Total agents: 52
+   Simulation days: 752
+   Optimized Leland A*: 1.7656
+   ML-Calibrated A*_ml: 1.8182
+
+Initializing ABM...
+  ✓ Black-Scholes MM sold option for $16.85
+    → OptionTrader_BS bought it
+  ✓ Leland MM sold option for $16.85
+    → OptionTrader_Leland bought it
+  ✓ Optimized Leland MM sold option for $16.85
+    → OptionTrader_Optimized bought it
+  ✓ ML-Calibrated MM sold option for $16.85
+    → OptionTrader_ML bought it
+  ✓ Strike price: $125.97
+
+Running ABM on real 125.97 → 190.73 data...
+Progress: 50...100...150...200...250...300...350...400...450...500...550...600...650...700...750...752 Done!
+
+Finalizing (option expiration)...
+✓ Final stock price: $190.73
+✓ Option payoff: $64.75
+  - OptionTraders received $64.75 each
+  - MarketMakers paid $64.75 each (minus hedging P&L)
+
+✓ ABM Model created
+   Total agents: 52
+   Simulation days: 752
+   Optimized Leland A*: 1.7656
+   ML-Calibrated A*_ml: 1.8182
+
+Initializing ABM...
+  ✓ Black-Scholes MM sold option for $16.85
+    → OptionTrader_BS bought it
+  ✓ Leland MM sold option for $16.85
+    → OptionTrader_Leland bought it
+  ✓ Optimized Leland MM sold option for $16.85
+    → OptionTrader_Optimized bought it
+  ✓ ML-Calibrated MM sold option for $16.85
+    → OptionTrader_ML bought it
+  ✓ Strike price: $125.97
+
+Running ABM on real 125.97 → 190.73 data...
+Progress: 50...100...150...200...250...300...350...400...450...500...550...600...650...700...750...752 Done!
+
+Finalizing (option expiration)...
+✓ Final stock price: $190.73
+✓ Option payoff: $64.75
+  - OptionTraders received $64.75 each
+  - MarketMakers paid $64.75 each (minus hedging P&L)
+
+✓ ABM Model created
+   Total agents: 52
+   Simulation days: 752
+   Optimized Leland A*: 1.7656
+   ML-Calibrated A*_ml: 1.8182
+
+Initializing ABM...
+  ✓ Black-Scholes MM sold option for $16.85
+    → OptionTrader_BS bought it
+  ✓ Leland MM sold option for $16.85
+    → OptionTrader_Leland bought it
+  ✓ Optimized Leland MM sold option for $16.85
+    → OptionTrader_Optimized bought it
+  ✓ ML-Calibrated MM sold option for $16.85
+    → OptionTrader_ML bought it
+  ✓ Strike price: $125.97
+
+Running ABM on real 125.97 → 190.73 data...
+Progress: 50...100...150...200...250...300...350...400...450...500...550...600...650...700...750...752 Done!
+
+Finalizing (option expiration)...
+✓ Final stock price: $190.73
+✓ Option payoff: $64.75
+  - OptionTraders received $64.75 each
+  - MarketMakers paid $64.75 each (minus hedging P&L)
+10%...
+✓ ABM Model created
+   Total agents: 52
+   Simulation days: 752
+   Optimized Leland A*: 1.7656
+   ML-Calibrated A*_ml: 1.8182
+
+Initializing ABM...
+  ✓ Black-Scholes MM sold option for $16.85
+    → OptionTrader_BS bought it
+  ✓ Leland MM sold option for $16.85
+    → OptionTrader_Leland bought it
+  ✓ Optimized Leland MM sold option for $16.85
+    → OptionTrader_Optimized bought it
+  ✓ ML-Calibrated MM sold option for $16.85
+    → OptionTrader_ML bought it
+  ✓ Strike price: $125.97
+
+Running ABM on real 125.97 → 190.73 data...
+Progress: 50...100...150...200...250...300...350...400...450...500...550...600...650...700...750...752 Done!
+
+Finalizing (option expiration)...
+✓ Final stock price: $190.73
+✓ Option payoff: $64.75
+  - OptionTraders received $64.75 each
+  - MarketMakers paid $64.75 each (minus hedging P&L)
+
+✓ ABM Model created
+   Total agents: 52
+   Simulation days: 752
+   Optimized Leland A*: 1.7656
+   ML-Calibrated A*_ml: 1.8182
+
+Initializing ABM...
+  ✓ Black-Scholes MM sold option for $16.85
+    → OptionTrader_BS bought it
+  ✓ Leland MM sold option for $16.85
+    → OptionTrader_Leland bought it
+  ✓ Optimized Leland MM sold option for $16.85
+    → OptionTrader_Optimized bought it
+  ✓ ML-Calibrated MM sold option for $16.85
+    → OptionTrader_ML bought it
+  ✓ Strike price: $125.97
+
+Running ABM on real 125.97 → 190.73 data...
+Progress: 50...100...150...200...250...300...350...400...450...500...550...600...650...700...750...752 Done!
+
+Finalizing (option expiration)...
+✓ Final stock price: $190.73
+✓ Option payoff: $64.75
+  - OptionTraders received $64.75 each
+  - MarketMakers paid $64.75 each (minus hedging P&L)
+
+✓ ABM Model created
+   Total agents: 52
+   Simulation days: 752
+   Optimized Leland A*: 1.7656
+   ML-Calibrated A*_ml: 1.8182
+
+Initializing ABM...
+  ✓ Black-Scholes MM sold option for $16.85
+    → OptionTrader_BS bought it
+  ✓ Leland MM sold option for $16.85
+    → OptionTrader_Leland bought it
+  ✓ Optimized Leland MM sold option for $16.85
+    → OptionTrader_Optimized bought it
+  ✓ ML-Calibrated MM sold option for $16.85
+    → OptionTrader_ML bought it
+  ✓ Strike price: $125.97
+
+Running ABM on real 125.97 → 190.73 data...
+Progress: 50...100...150...200...250...300...350...400...450...500...550...600...650...700...750...752 Done!
+
+Finalizing (option expiration)...
+✓ Final stock price: $190.73
+✓ Option payoff: $64.75
+  - OptionTraders received $64.75 each
+  - MarketMakers paid $64.75 each (minus hedging P&L)
+20%...
+✓ ABM Model created
+   Total agents: 52
+   Simulation days: 752
+   Optimized Leland A*: 1.7656
+   ML-Calibrated A*_ml: 1.8182
+
+Initializing ABM...
+  ✓ Black-Scholes MM sold option for $16.85
+    → OptionTrader_BS bought it
+  ✓ Leland MM sold option for $16.85
+    → OptionTrader_Leland bought it
+  ✓ Optimized Leland MM sold option for $16.85
+    → OptionTrader_Optimized bought it
+  ✓ ML-Calibrated MM sold option for $16.85
+    → OptionTrader_ML bought it
+  ✓ Strike price: $125.97
+
+Running ABM on real 125.97 → 190.73 data...
+Progress: 50...100...150...200...250...300...350...400...450...500...550...600...650...700...750...752 Done!
+
+Finalizing (option expiration)...
+✓ Final stock price: $190.73
+✓ Option payoff: $64.75
+  - OptionTraders received $64.75 each
+  - MarketMakers paid $64.75 each (minus hedging P&L)
+
+✓ ABM Model created
+   Total agents: 52
+   Simulation days: 752
+   Optimized Leland A*: 1.7656
+   ML-Calibrated A*_ml: 1.8182
+
+Initializing ABM...
+  ✓ Black-Scholes MM sold option for $16.85
+    → OptionTrader_BS bought it
+  ✓ Leland MM sold option for $16.85
+    → OptionTrader_Leland bought it
+  ✓ Optimized Leland MM sold option for $16.85
+    → OptionTrader_Optimized bought it
+  ✓ ML-Calibrated MM sold option for $16.85
+    → OptionTrader_ML bought it
+  ✓ Strike price: $125.97
+
+Running ABM on real 125.97 → 190.73 data...
+Progress: 50...100...150...200...250...300...350...400...450...500...550...600...650...700...750...752 Done!
+
+Finalizing (option expiration)...
+✓ Final stock price: $190.73
+✓ Option payoff: $64.75
+  - OptionTraders received $64.75 each
+  - MarketMakers paid $64.75 each (minus hedging P&L)
+
+✓ ABM Model created
+   Total agents: 52
+   Simulation days: 752
+   Optimized Leland A*: 1.7656
+   ML-Calibrated A*_ml: 1.8182
+
+Initializing ABM...
+  ✓ Black-Scholes MM sold option for $16.85
+    → OptionTrader_BS bought it
+  ✓ Leland MM sold option for $16.85
+    → OptionTrader_Leland bought it
+  ✓ Optimized Leland MM sold option for $16.85
+    → OptionTrader_Optimized bought it
+  ✓ ML-Calibrated MM sold option for $16.85
+    → OptionTrader_ML bought it
+  ✓ Strike price: $125.97
+
+Running ABM on real 125.97 → 190.73 data...
+Progress: 50...100...150...200...250...300...350...400...450...500...550...600...650...700...750...752 Done!
+
+Finalizing (option expiration)...
+✓ Final stock price: $190.73
+✓ Option payoff: $64.75
+  - OptionTraders received $64.75 each
+  - MarketMakers paid $64.75 each (minus hedging P&L)
+30%...
+✓ ABM Model created
+   Total agents: 52
+   Simulation days: 752
+   Optimized Leland A*: 1.7656
+   ML-Calibrated A*_ml: 1.8182
+
+Initializing ABM...
+  ✓ Black-Scholes MM sold option for $16.85
+    → OptionTrader_BS bought it
+  ✓ Leland MM sold option for $16.85
+    → OptionTrader_Leland bought it
+  ✓ Optimized Leland MM sold option for $16.85
+    → OptionTrader_Optimized bought it
+  ✓ ML-Calibrated MM sold option for $16.85
+    → OptionTrader_ML bought it
+  ✓ Strike price: $125.97
+
+Running ABM on real 125.97 → 190.73 data...
+Progress: 50...100...150...200...250...300...350...400...450...500...550...600...650...700...750...752 Done!
+
+Finalizing (option expiration)...
+✓ Final stock price: $190.73
+✓ Option payoff: $64.75
+  - OptionTraders received $64.75 each
+  - MarketMakers paid $64.75 each (minus hedging P&L)
+
+✓ ABM Model created
+   Total agents: 52
+   Simulation days: 752
+   Optimized Leland A*: 1.7656
+   ML-Calibrated A*_ml: 1.8182
+
+Initializing ABM...
+  ✓ Black-Scholes MM sold option for $16.85
+    → OptionTrader_BS bought it
+  ✓ Leland MM sold option for $16.85
+    → OptionTrader_Leland bought it
+  ✓ Optimized Leland MM sold option for $16.85
+    → OptionTrader_Optimized bought it
+  ✓ ML-Calibrated MM sold option for $16.85
+    → OptionTrader_ML bought it
+  ✓ Strike price: $125.97
+
+Running ABM on real 125.97 → 190.73 data...
+Progress: 50...100...150...200...250...300...350...400...450...500...550...600...650...700...750...752 Done!
+
+Finalizing (option expiration)...
+✓ Final stock price: $190.73
+✓ Option payoff: $64.75
+  - OptionTraders received $64.75 each
+  - MarketMakers paid $64.75 each (minus hedging P&L)
+
+✓ ABM Model created
+   Total agents: 52
+   Simulation days: 752
+   Optimized Leland A*: 1.7656
+   ML-Calibrated A*_ml: 1.8182
+
+Initializing ABM...
+  ✓ Black-Scholes MM sold option for $16.85
+    → OptionTrader_BS bought it
+  ✓ Leland MM sold option for $16.85
+    → OptionTrader_Leland bought it
+  ✓ Optimized Leland MM sold option for $16.85
+    → OptionTrader_Optimized bought it
+  ✓ ML-Calibrated MM sold option for $16.85
+    → OptionTrader_ML bought it
+  ✓ Strike price: $125.97
+
+Running ABM on real 125.97 → 190.73 data...
+Progress: 50...100...150...200...250...300...350...400...450...500...550...600...650...700...750...752 Done!
+
+Finalizing (option expiration)...
+✓ Final stock price: $190.73
+✓ Option payoff: $64.75
+  - OptionTraders received $64.75 each
+  - MarketMakers paid $64.75 each (minus hedging P&L)
+40%...
+✓ ABM Model created
+   Total agents: 52
+   Simulation days: 752
+   Optimized Leland A*: 1.7656
+   ML-Calibrated A*_ml: 1.8182
+
+Initializing ABM...
+  ✓ Black-Scholes MM sold option for $16.85
+    → OptionTrader_BS bought it
+  ✓ Leland MM sold option for $16.85
+    → OptionTrader_Leland bought it
+  ✓ Optimized Leland MM sold option for $16.85
+    → OptionTrader_Optimized bought it
+  ✓ ML-Calibrated MM sold option for $16.85
+    → OptionTrader_ML bought it
+  ✓ Strike price: $125.97
+
+Running ABM on real 125.97 → 190.73 data...
+Progress: 50...100...150...200...250...300...350...400...450...500...550...600...650...700...750...752 Done!
+
+Finalizing (option expiration)...
+✓ Final stock price: $190.73
+✓ Option payoff: $64.75
+  - OptionTraders received $64.75 each
+  - MarketMakers paid $64.75 each (minus hedging P&L)
+
+✓ ABM Model created
+   Total agents: 52
+   Simulation days: 752
+   Optimized Leland A*: 1.7656
+   ML-Calibrated A*_ml: 1.8182
+
+Initializing ABM...
+  ✓ Black-Scholes MM sold option for $16.85
+    → OptionTrader_BS bought it
+  ✓ Leland MM sold option for $16.85
+    → OptionTrader_Leland bought it
+  ✓ Optimized Leland MM sold option for $16.85
+    → OptionTrader_Optimized bought it
+  ✓ ML-Calibrated MM sold option for $16.85
+    → OptionTrader_ML bought it
+  ✓ Strike price: $125.97
+
+Running ABM on real 125.97 → 190.73 data...
+Progress: 50...100...150...200...250...300...350...400...450...500...550...600...650...700...750...752 Done!
+
+Finalizing (option expiration)...
+✓ Final stock price: $190.73
+✓ Option payoff: $64.75
+  - OptionTraders received $64.75 each
+  - MarketMakers paid $64.75 each (minus hedging P&L)
+
+✓ ABM Model created
+   Total agents: 52
+   Simulation days: 752
+   Optimized Leland A*: 1.7656
+   ML-Calibrated A*_ml: 1.8182
+
+Initializing ABM...
+  ✓ Black-Scholes MM sold option for $16.85
+    → OptionTrader_BS bought it
+  ✓ Leland MM sold option for $16.85
+    → OptionTrader_Leland bought it
+  ✓ Optimized Leland MM sold option for $16.85
+    → OptionTrader_Optimized bought it
+  ✓ ML-Calibrated MM sold option for $16.85
+    → OptionTrader_ML bought it
+  ✓ Strike price: $125.97
+
+Running ABM on real 125.97 → 190.73 data...
+Progress: 50...100...150...200...250...300...350...400...450...500...550...600...650...700...750...752 Done!
+
+Finalizing (option expiration)...
+✓ Final stock price: $190.73
+✓ Option payoff: $64.75
+  - OptionTraders received $64.75 each
+  - MarketMakers paid $64.75 each (minus hedging P&L)
+50%...
+✓ ABM Model created
+   Total agents: 52
+   Simulation days: 752
+   Optimized Leland A*: 1.7656
+   ML-Calibrated A*_ml: 1.8182
+
+Initializing ABM...
+  ✓ Black-Scholes MM sold option for $16.85
+    → OptionTrader_BS bought it
+  ✓ Leland MM sold option for $16.85
+    → OptionTrader_Leland bought it
+  ✓ Optimized Leland MM sold option for $16.85
+    → OptionTrader_Optimized bought it
+  ✓ ML-Calibrated MM sold option for $16.85
+    → OptionTrader_ML bought it
+  ✓ Strike price: $125.97
+
+Running ABM on real 125.97 → 190.73 data...
+Progress: 50...100...150...200...250...300...350...400...450...500...550...600...650...700...750...752 Done!
+
+Finalizing (option expiration)...
+✓ Final stock price: $190.73
+✓ Option payoff: $64.75
+  - OptionTraders received $64.75 each
+  - MarketMakers paid $64.75 each (minus hedging P&L)
+
+✓ ABM Model created
+   Total agents: 52
+   Simulation days: 752
+   Optimized Leland A*: 1.7656
+   ML-Calibrated A*_ml: 1.8182
+
+Initializing ABM...
+  ✓ Black-Scholes MM sold option for $16.85
+    → OptionTrader_BS bought it
+  ✓ Leland MM sold option for $16.85
+    → OptionTrader_Leland bought it
+  ✓ Optimized Leland MM sold option for $16.85
+    → OptionTrader_Optimized bought it
+  ✓ ML-Calibrated MM sold option for $16.85
+    → OptionTrader_ML bought it
+  ✓ Strike price: $125.97
+
+Running ABM on real 125.97 → 190.73 data...
+Progress: 50...100...150...200...250...300...350...400...450...500...550...600...650...700...750...752 Done!
+
+Finalizing (option expiration)...
+✓ Final stock price: $190.73
+✓ Option payoff: $64.75
+  - OptionTraders received $64.75 each
+  - MarketMakers paid $64.75 each (minus hedging P&L)
+
+✓ ABM Model created
+   Total agents: 52
+   Simulation days: 752
+   Optimized Leland A*: 1.7656
+   ML-Calibrated A*_ml: 1.8182
+
+Initializing ABM...
+  ✓ Black-Scholes MM sold option for $16.85
+    → OptionTrader_BS bought it
+  ✓ Leland MM sold option for $16.85
+    → OptionTrader_Leland bought it
+  ✓ Optimized Leland MM sold option for $16.85
+    → OptionTrader_Optimized bought it
+  ✓ ML-Calibrated MM sold option for $16.85
+    → OptionTrader_ML bought it
+  ✓ Strike price: $125.97
+
+Running ABM on real 125.97 → 190.73 data...
+Progress: 50...100...150...200...250...300...350...400...450...500...550...600...650...700...750...752 Done!
+
+Finalizing (option expiration)...
+✓ Final stock price: $190.73
+✓ Option payoff: $64.75
+  - OptionTraders received $64.75 each
+  - MarketMakers paid $64.75 each (minus hedging P&L)
+60%...
+✓ ABM Model created
+   Total agents: 52
+   Simulation days: 752
+   Optimized Leland A*: 1.7656
+   ML-Calibrated A*_ml: 1.8182
+
+Initializing ABM...
+  ✓ Black-Scholes MM sold option for $16.85
+    → OptionTrader_BS bought it
+  ✓ Leland MM sold option for $16.85
+    → OptionTrader_Leland bought it
+  ✓ Optimized Leland MM sold option for $16.85
+    → OptionTrader_Optimized bought it
+  ✓ ML-Calibrated MM sold option for $16.85
+    → OptionTrader_ML bought it
+  ✓ Strike price: $125.97
+
+Running ABM on real 125.97 → 190.73 data...
+Progress: 50...100...150...200...250...300...350...400...450...500...550...600...650...700...750...752 Done!
+
+Finalizing (option expiration)...
+✓ Final stock price: $190.73
+✓ Option payoff: $64.75
+  - OptionTraders received $64.75 each
+  - MarketMakers paid $64.75 each (minus hedging P&L)
+
+✓ ABM Model created
+   Total agents: 52
+   Simulation days: 752
+   Optimized Leland A*: 1.7656
+   ML-Calibrated A*_ml: 1.8182
+
+Initializing ABM...
+  ✓ Black-Scholes MM sold option for $16.85
+    → OptionTrader_BS bought it
+  ✓ Leland MM sold option for $16.85
+    → OptionTrader_Leland bought it
+  ✓ Optimized Leland MM sold option for $16.85
+    → OptionTrader_Optimized bought it
+  ✓ ML-Calibrated MM sold option for $16.85
+    → OptionTrader_ML bought it
+  ✓ Strike price: $125.97
+
+Running ABM on real 125.97 → 190.73 data...
+Progress: 50...100...150...200...250...300...350...400...450...500...550...600...650...700...750...752 Done!
+
+Finalizing (option expiration)...
+✓ Final stock price: $190.73
+✓ Option payoff: $64.75
+  - OptionTraders received $64.75 each
+  - MarketMakers paid $64.75 each (minus hedging P&L)
+
+✓ ABM Model created
+   Total agents: 52
+   Simulation days: 752
+   Optimized Leland A*: 1.7656
+   ML-Calibrated A*_ml: 1.8182
+
+Initializing ABM...
+  ✓ Black-Scholes MM sold option for $16.85
+    → OptionTrader_BS bought it
+  ✓ Leland MM sold option for $16.85
+    → OptionTrader_Leland bought it
+  ✓ Optimized Leland MM sold option for $16.85
+    → OptionTrader_Optimized bought it
+  ✓ ML-Calibrated MM sold option for $16.85
+    → OptionTrader_ML bought it
+  ✓ Strike price: $125.97
+
+Running ABM on real 125.97 → 190.73 data...
+Progress: 50...100...150...200...250...300...350...400...450...500...550...600...650...700...750...752 Done!
+
+Finalizing (option expiration)...
+✓ Final stock price: $190.73
+✓ Option payoff: $64.75
+  - OptionTraders received $64.75 each
+  - MarketMakers paid $64.75 each (minus hedging P&L)
+70%...
+✓ ABM Model created
+   Total agents: 52
+   Simulation days: 752
+   Optimized Leland A*: 1.7656
+   ML-Calibrated A*_ml: 1.8182
+
+Initializing ABM...
+  ✓ Black-Scholes MM sold option for $16.85
+    → OptionTrader_BS bought it
+  ✓ Leland MM sold option for $16.85
+    → OptionTrader_Leland bought it
+  ✓ Optimized Leland MM sold option for $16.85
+    → OptionTrader_Optimized bought it
+  ✓ ML-Calibrated MM sold option for $16.85
+    → OptionTrader_ML bought it
+  ✓ Strike price: $125.97
+
+Running ABM on real 125.97 → 190.73 data...
+Progress: 50...100...150...200...250...300...350...400...450...500...550...600...650...700...750...752 Done!
+
+Finalizing (option expiration)...
+✓ Final stock price: $190.73
+✓ Option payoff: $64.75
+  - OptionTraders received $64.75 each
+  - MarketMakers paid $64.75 each (minus hedging P&L)
+
+✓ ABM Model created
+   Total agents: 52
+   Simulation days: 752
+   Optimized Leland A*: 1.7656
+   ML-Calibrated A*_ml: 1.8182
+
+Initializing ABM...
+  ✓ Black-Scholes MM sold option for $16.85
+    → OptionTrader_BS bought it
+  ✓ Leland MM sold option for $16.85
+    → OptionTrader_Leland bought it
+  ✓ Optimized Leland MM sold option for $16.85
+    → OptionTrader_Optimized bought it
+  ✓ ML-Calibrated MM sold option for $16.85
+    → OptionTrader_ML bought it
+  ✓ Strike price: $125.97
+
+Running ABM on real 125.97 → 190.73 data...
+Progress: 50...100...150...200...250...300...350...400...450...500...550...600...650...700...750...752 Done!
+
+Finalizing (option expiration)...
+✓ Final stock price: $190.73
+✓ Option payoff: $64.75
+  - OptionTraders received $64.75 each
+  - MarketMakers paid $64.75 each (minus hedging P&L)
+
+✓ ABM Model created
+   Total agents: 52
+   Simulation days: 752
+   Optimized Leland A*: 1.7656
+   ML-Calibrated A*_ml: 1.8182
+
+Initializing ABM...
+  ✓ Black-Scholes MM sold option for $16.85
+    → OptionTrader_BS bought it
+  ✓ Leland MM sold option for $16.85
+    → OptionTrader_Leland bought it
+  ✓ Optimized Leland MM sold option for $16.85
+    → OptionTrader_Optimized bought it
+  ✓ ML-Calibrated MM sold option for $16.85
+    → OptionTrader_ML bought it
+  ✓ Strike price: $125.97
+
+Running ABM on real 125.97 → 190.73 data...
+Progress: 50...100...150...200...250...300...350...400...450...500...550...600...650...700...750...752 Done!
+
+Finalizing (option expiration)...
+✓ Final stock price: $190.73
+✓ Option payoff: $64.75
+  - OptionTraders received $64.75 each
+  - MarketMakers paid $64.75 each (minus hedging P&L)
+80%...
+✓ ABM Model created
+   Total agents: 52
+   Simulation days: 752
+   Optimized Leland A*: 1.7656
+   ML-Calibrated A*_ml: 1.8182
+
+Initializing ABM...
+  ✓ Black-Scholes MM sold option for $16.85
+    → OptionTrader_BS bought it
+  ✓ Leland MM sold option for $16.85
+    → OptionTrader_Leland bought it
+  ✓ Optimized Leland MM sold option for $16.85
+    → OptionTrader_Optimized bought it
+  ✓ ML-Calibrated MM sold option for $16.85
+    → OptionTrader_ML bought it
+  ✓ Strike price: $125.97
+
+Running ABM on real 125.97 → 190.73 data...
+Progress: 50...100...150...200...250...300...350...400...450...500...550...600...650...700...750...752 Done!
+
+Finalizing (option expiration)...
+✓ Final stock price: $190.73
+✓ Option payoff: $64.75
+  - OptionTraders received $64.75 each
+  - MarketMakers paid $64.75 each (minus hedging P&L)
+
+✓ ABM Model created
+   Total agents: 52
+   Simulation days: 752
+   Optimized Leland A*: 1.7656
+   ML-Calibrated A*_ml: 1.8182
+
+Initializing ABM...
+  ✓ Black-Scholes MM sold option for $16.85
+    → OptionTrader_BS bought it
+  ✓ Leland MM sold option for $16.85
+    → OptionTrader_Leland bought it
+  ✓ Optimized Leland MM sold option for $16.85
+    → OptionTrader_Optimized bought it
+  ✓ ML-Calibrated MM sold option for $16.85
+    → OptionTrader_ML bought it
+  ✓ Strike price: $125.97
+
+Running ABM on real 125.97 → 190.73 data...
+Progress: 50...100...150...200...250...300...350...400...450...500...550...600...650...700...750...752 Done!
+
+Finalizing (option expiration)...
+✓ Final stock price: $190.73
+✓ Option payoff: $64.75
+  - OptionTraders received $64.75 each
+  - MarketMakers paid $64.75 each (minus hedging P&L)
+
+✓ ABM Model created
+   Total agents: 52
+   Simulation days: 752
+   Optimized Leland A*: 1.7656
+   ML-Calibrated A*_ml: 1.8182
+
+Initializing ABM...
+  ✓ Black-Scholes MM sold option for $16.85
+    → OptionTrader_BS bought it
+  ✓ Leland MM sold option for $16.85
+    → OptionTrader_Leland bought it
+  ✓ Optimized Leland MM sold option for $16.85
+    → OptionTrader_Optimized bought it
+  ✓ ML-Calibrated MM sold option for $16.85
+    → OptionTrader_ML bought it
+  ✓ Strike price: $125.97
+
+Running ABM on real 125.97 → 190.73 data...
+Progress: 50...100...150...200...250...300...350...400...450...500...550...600...650...700...750...752 Done!
+
+Finalizing (option expiration)...
+✓ Final stock price: $190.73
+✓ Option payoff: $64.75
+  - OptionTraders received $64.75 each
+  - MarketMakers paid $64.75 each (minus hedging P&L)
+90%...
+✓ ABM Model created
+   Total agents: 52
+   Simulation days: 752
+   Optimized Leland A*: 1.7656
+   ML-Calibrated A*_ml: 1.8182
+
+Initializing ABM...
+  ✓ Black-Scholes MM sold option for $16.85
+    → OptionTrader_BS bought it
+  ✓ Leland MM sold option for $16.85
+    → OptionTrader_Leland bought it
+  ✓ Optimized Leland MM sold option for $16.85
+    → OptionTrader_Optimized bought it
+  ✓ ML-Calibrated MM sold option for $16.85
+    → OptionTrader_ML bought it
+  ✓ Strike price: $125.97
+
+Running ABM on real 125.97 → 190.73 data...
+Progress: 50...100...150...200...250...300...350...400...450...500...550...600...650...700...750...752 Done!
+
+Finalizing (option expiration)...
+✓ Final stock price: $190.73
+✓ Option payoff: $64.75
+  - OptionTraders received $64.75 each
+  - MarketMakers paid $64.75 each (minus hedging P&L)
+
+✓ ABM Model created
+   Total agents: 52
+   Simulation days: 752
+   Optimized Leland A*: 1.7656
+   ML-Calibrated A*_ml: 1.8182
+
+Initializing ABM...
+  ✓ Black-Scholes MM sold option for $16.85
+    → OptionTrader_BS bought it
+  ✓ Leland MM sold option for $16.85
+    → OptionTrader_Leland bought it
+  ✓ Optimized Leland MM sold option for $16.85
+    → OptionTrader_Optimized bought it
+  ✓ ML-Calibrated MM sold option for $16.85
+    → OptionTrader_ML bought it
+  ✓ Strike price: $125.97
+
+Running ABM on real 125.97 → 190.73 data...
+Progress: 50...100...150...200...250...300...350...400...450...500...550...600...650...700...750...752 Done!
+
+Finalizing (option expiration)...
+✓ Final stock price: $190.73
+✓ Option payoff: $64.75
+  - OptionTraders received $64.75 each
+  - MarketMakers paid $64.75 each (minus hedging P&L)
+
+✓ ABM Model created
+   Total agents: 52
+   Simulation days: 752
+   Optimized Leland A*: 1.7656
+   ML-Calibrated A*_ml: 1.8182
+
+Initializing ABM...
+  ✓ Black-Scholes MM sold option for $16.85
+    → OptionTrader_BS bought it
+  ✓ Leland MM sold option for $16.85
+    → OptionTrader_Leland bought it
+  ✓ Optimized Leland MM sold option for $16.85
+    → OptionTrader_Optimized bought it
+  ✓ ML-Calibrated MM sold option for $16.85
+    → OptionTrader_ML bought it
+  ✓ Strike price: $125.97
+
+Running ABM on real 125.97 → 190.73 data...
+Progress: 50...100...150...200...250...300...350...400...450...500...550...600...650...700...750...752 Done!
+
+Finalizing (option expiration)...
+✓ Final stock price: $190.73
+✓ Option payoff: $64.75
+  - OptionTraders received $64.75 each
+  - MarketMakers paid $64.75 each (minus hedging P&L)
+100%.../Users/Admin/leland_abm_project/.venv/lib/python3.11/site-packages/scipy/stats/_axis_nan_policy.py:423: RuntimeWarning: Precision loss occurred in moment calculation due to catastrophic cancellation. This occurs when the data are nearly identical. Results may be unreliable.
+  return hypotest_fun_in(*args, **kwds)
+ Done!
+
+
+================================================================================
+                              STATISTICAL SUMMARY
+================================================================================
+
+Strategy        Mean P&L        Std P&L         95% CI                         Mean TC     
+------------------------------------------------------------------------------------------
+BS              $  -17.42      $    0.00      [-17.42, -17.42]               $   14.82
+Leland          $  -13.81      $    0.00      [-13.81, -13.81]               $    9.70
+Optimized       $  -14.19      $    0.00      [-14.19, -14.19]               $   11.63
+ML              $  -14.15      $    0.00      [-14.15, -14.15]               $   11.57
+
+==========================================================================================
+
+================================================================================
+                  PAIRWISE STATISTICAL TESTS (Paired t-tests)
+================================================================================
+
+Comparison                Mean Diff       t-stat       p-value      Significant    
+------------------------------------------------------------------------------------------
+BS_vs_Leland              $     -3.61         -inf    0.000000    ✓ YES          
+BS_vs_Optimized           $     -3.23         -inf    0.000000    ✓ YES          
+BS_vs_ML                  $     -3.27         -inf    0.000000    ✓ YES          
+Leland_vs_Optimized       $      0.38          inf    0.000000    ✓ YES          
+Leland_vs_ML              $      0.34          inf    0.000000    ✓ YES          
+Optimized_vs_ML           $     -0.04         -inf    0.000000    ✓ YES          
+
+==========================================================================================
+
+================================================================================
+                                  KEY FINDINGS
+================================================================================
+
+✓ Best Strategy: BS
+  Mean P&L: $-17.42 ± $0.00
+
+✓ Leland vs Black-Scholes:
+  Average savings: $3.61 (20.7%)
+  Statistically significant: YES (p=0.0000)
+
+✓ Optimized vs Classical Leland:
+  Average improvement: $-0.38
+  Statistically significant: YES (p=0.0000)
+
+✓ ML-Calibrated vs Optimized:
+  Average improvement: $0.04
+  Statistically significant: YES (p=0.0000)
+
+==========================================================================================
+
+✓ Individual runs exported to: multi_abm_runs_AAPL.csv
+✓ Summary statistics exported to: multi_abm_summary_AAPL.csv
+✓ Statistical tests exported to: multi_abm_tests_AAPL.csv
+
+================================================================================
+                               ANALYSIS COMPLETE
+================================================================================
+
+✓ Completed 30 ABM runs for AAPL
+✓ Results exported to CSV files
+✓ Statistical significance tested
+
+✓ Multi-run ABM complete for AAPL
+
+--------------------------------------------------------------------------------
+PART 2: ADAPTIVE SENSITIVITY ANALYSIS
+--------------------------------------------------------------------------------
+
+================================================================================
+                       MULTI-TICKER SENSITIVITY ANALYSIS
+================================================================================
+
+Tickers to analyze: AAPL
+Transaction costs: [0.005, 0.01, 0.015, 0.02]
+Rebalancing frequencies: ['1/252', '1/126', '1/63', '1/21']
+
+================================================================================
+                              ANALYZING AAPL
+================================================================================
+
+Downloading AAPL data...
+
+📊 Downloading AAPL data...
+   Period: 2021-01-01 to 2023-12-31
+✓ Downloaded 753 days
+   Price range: $113.44 - $196.26
+   Realized volatility: 27.75%
+   Realized drift: 13.90%
+
+✓ AAPL volatility: σ = 0.2775
+
+--- Testing Transaction Costs (k) for AAPL ---
+
+================================================================================
+                   SENSITIVITY TO TRANSACTION COST (k) - AAPL
+================================================================================
+
+Testing k values: [0.005, 0.01, 0.015, 0.02]
+Real market volatility (σ): 0.2775
+Fixed dt: 0.003968 (252 steps/year)
+Monte Carlo simulations per k: 10,000
+
+Running k=0.0050, σ=0.2775...
+  Calibrating Optimized Leland (grid search)...
+
+======================================================================
+                    OPTIMIZING LELAND'S A PARAMETER
+======================================================================
+
+Parameters:
+  S0=100.00, K=100.00, T=1.00, σ=0.2775
+  k=0.0050, dt=0.003968
+  Simulations: 2,000
+  Testing A ∈ [0.156, 0.756] (11 points)
+
+Running optimization...
+  Progress: 5/11 | Current A=0.396, Std=0.6864
+  Progress: 10/11 | Current A=0.696, Std=0.7508
+  Progress: 11/11 | Current A=0.756, Std=0.8126
+
+======================================================================
+✓ OPTIMIZATION COMPLETE
+======================================================================
+
+  Optimal A*:          0.4564
+  Optimal Std Error:   0.6847
+  Mean Error:          -16.6566
+  Mean Trans. Cost:    2.5401
+
+  Classical Leland A:  0.4564
+  Classical Std Error: 0.6847
+  Improvement:         0.00%
+======================================================================
+
+  Calibrating ML-Calibrated Leland (Bayesian)...
+
+======================================================================
+               ML-CALIBRATED LELAND OPTIMIZATION
+                    (Bayesian Optimization + GP)
+======================================================================
+
+Parameters:
+  S0=100.00, K=100.00, T=1.00, σ=0.2775
+  k=0.0050, dt=0.003968
+  Initial exploration: 6 points
+  BO iterations: 12
+  MC sims per eval: 500
+  Acquisition: EI
+
+  Classical Leland A: 0.4564
+
+Phase 1: Initial Random Exploration (6 points)...
+  1/6 | A=0.5736, Std=0.6700
+  2/6 | A=1.7935, Std=1.6609
+  3/6 | A=1.6350, Std=1.4930
+  4/6 | A=0.8129, Std=0.8707
+  5/6 | A=0.8955, Std=0.9283
+  6/6 | A=1.6492, Std=1.5735
+
+Phase 2: Bayesian Optimization (12 iterations)...
+  1/12 | A=0.6465, Std=0.7453 (Best so far: 0.6700)
+  2/12 | A=0.4444, Std=0.6374 (Best so far: 0.6374)
+  3/12 | A=1.4141, Std=1.4157 (Best so far: 0.6374)
+  4/12 | A=0.4848, Std=0.6438 (Best so far: 0.6374)
+  5/12 | A=0.2626, Std=0.7081 (Best so far: 0.6374)
+  6/12 | A=0.0202, Std=1.0792 (Best so far: 0.6374)
+  7/12 | A=0.3434, Std=0.6761 (Best so far: 0.6374)
+  8/12 | A=2.0000, Std=1.7681 (Best so far: 0.6374)
+  9/12 | A=1.1313, Std=1.1994 (Best so far: 0.6374)
+  10/12 | A=0.1616, Std=0.9355 (Best so far: 0.6374)
+  11/12 | A=1.2525, Std=1.2603 (Best so far: 0.6374)
+  12/12 | A=0.4444, Std=0.6283 (Best so far: 0.6283)
+
+======================================================================
+✓ ML OPTIMIZATION COMPLETE
+======================================================================
+
+  ML-Optimal A*:       0.4444
+  ML Std Error:        0.6283
+  Mean Error:          -16.7227
+  Total evaluations:   18
+
+  Classical Leland A:  0.4444
+  Classical Std Error: 0.6374
+  Improvement:         1.43%
+======================================================================
+
+  Running 10,000 Monte Carlo simulations...
+  ✓ Complete | BS: 1.1525, Leland: 0.6690, Opt: 0.6690, ML: 0.6689
+
+Running k=0.0100, σ=0.2775...
+  Calibrating Optimized Leland (grid search)...
+
+======================================================================
+                    OPTIMIZING LELAND'S A PARAMETER
+======================================================================
+
+Parameters:
+  S0=100.00, K=100.00, T=1.00, σ=0.2775
+  k=0.0100, dt=0.003968
+  Simulations: 2,000
+  Testing A ∈ [0.613, 1.213] (11 points)
+
+Running optimization...
+  Progress: 5/11 | Current A=0.853, Std=0.7292
+  Progress: 10/11 | Current A=1.153, Std=0.7909
+  Progress: 11/11 | Current A=1.213, Std=0.8492
+
+======================================================================
+✓ OPTIMIZATION COMPLETE
+/Users/Admin/leland_abm_project/.venv/lib/python3.11/site-packages/sklearn/gaussian_process/_gpr.py:670: ConvergenceWarning: lbfgs failed to converge after 8 iteration(s) (status=2):
+ABNORMAL: 
+
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  _check_optimize_result("lbfgs", opt_res)
+======================================================================
+
+  Optimal A*:          0.8528
+  Optimal Std Error:   0.7292
+  Mean Error:          -19.0152
+  Mean Trans. Cost:    4.7637
+
+  Classical Leland A:  0.9128
+  Classical Std Error: 0.7313
+  Improvement:         0.29%
+======================================================================
+
+  Calibrating ML-Calibrated Leland (Bayesian)...
+
+======================================================================
+               ML-CALIBRATED LELAND OPTIMIZATION
+                    (Bayesian Optimization + GP)
+======================================================================
+
+Parameters:
+  S0=100.00, K=100.00, T=1.00, σ=0.2775
+  k=0.0100, dt=0.003968
+  Initial exploration: 6 points
+  BO iterations: 12
+  MC sims per eval: 500
+  Acquisition: EI
+
+  Classical Leland A: 0.9128
+
+Phase 1: Initial Random Exploration (6 points)...
+  1/6 | A=0.1010, Std=1.7233
+  2/6 | A=1.0598, Std=0.8367
+  3/6 | A=0.2788, Std=1.3862
+  4/6 | A=0.9673, Std=0.7174
+  5/6 | A=0.7084, Std=0.7559
+  6/6 | A=1.6532, Std=1.1363
+
+Phase 2: Bayesian Optimization (12 iterations)...
+  1/12 | A=0.8687, Std=0.7277 (Best so far: 0.7174)
+  2/12 | A=0.5455, Std=0.9250 (Best so far: 0.7174)
+  3/12 | A=2.0000, Std=1.4107 (Best so far: 0.7174)
+  4/12 | A=0.9293, Std=0.7268 (Best so far: 0.7174)
+  5/12 | A=0.7879, Std=0.7369 (Best so far: 0.7174)
+  6/12 | A=1.4141, Std=0.9316 (Best so far: 0.7174)
+  7/12 | A=1.2929, Std=0.8492 (Best so far: 0.7174)
+  8/12 | A=1.7980, Std=1.2329 (Best so far: 0.7174)
+  9/12 | A=0.6263, Std=0.8233 (Best so far: 0.7174)
+  10/12 | A=0.4242, Std=1.1046 (Best so far: 0.7174)
+  11/12 | A=1.5354, Std=1.0452 (Best so far: 0.7174)
+  12/12 | A=0.9697, Std=0.7284 (Best so far: 0.7174)
+
+======================================================================
+✓ ML OPTIMIZATION COMPLETE
+======================================================================
+
+  ML-Optimal A*:       0.9673
+  ML Std Error:        0.7174
+  Mean Error:          -18.9618
+  Total evaluations:   18
+
+  Classical Leland A:  0.9293
+  Classical Std Error: 0.7268
+  Improvement:         1.28%
+======================================================================
+
+  Running 10,000 Monte Carlo simulations...
+  ✓ Complete | BS: 2.0176, Leland: 0.7367, Opt: 0.7398, ML: 0.7427
+
+Running k=0.0150, σ=0.2775...
+  Calibrating Optimized Leland (grid search)...
+
+======================================================================
+                    OPTIMIZING LELAND'S A PARAMETER
+======================================================================
+
+Parameters:
+  S0=100.00, K=100.00, T=1.00, σ=0.2775
+  k=0.0150, dt=0.003968
+  Simulations: 2,000
+  Testing A ∈ [1.069, 1.669] (11 points)
+
+Running optimization...
+  Progress: 5/11 | Current A=1.309, Std=0.8092
+  Progress: 10/11 | Current A=1.609, Std=0.8643
+  Progress: 11/11 | Current A=1.669, Std=0.8969
+
+======================================================================
+✓ OPTIMIZATION COMPLETE
+======================================================================
+
+  Optimal A*:          1.3692
+  Optimal Std Error:   0.7745
+  Mean Error:          -21.0396
+  Mean Trans. Cost:    6.7868
+
+  Classical Leland A:  1.3692
+  Classical Std Error: 0.7745
+  Improvement:         0.00%
+======================================================================
+
+  Calibrating ML-Calibrated Leland (Bayesian)...
+
+======================================================================
+               ML-CALIBRATED LELAND OPTIMIZATION
+                    (Bayesian Optimization + GP)
+======================================================================
+
+Parameters:
+  S0=100.00, K=100.00, T=1.00, σ=0.2775
+  k=0.0150, dt=0.003968
+  Initial exploration: 6 points
+  BO iterations: 12
+  MC sims per eval: 500
+  Acquisition: EI
+
+  Classical Leland A: 1.3692
+
+Phase 1: Initial Random Exploration (6 points)...
+  1/6 | A=1.2585, Std=0.8452
+  2/6 | A=1.7189, Std=0.8908
+  3/6 | A=1.4285, Std=0.8413
+  4/6 | A=1.0004, Std=0.9424
+  5/6 | A=1.6302, Std=0.8015
+  6/6 | A=1.4613, Std=0.8094
+
+Phase 2: Bayesian Optimization (12 iterations)...
+  1/12 | A=1.5960, Std=0.8327 (Best so far: 0.8015)
+  2/12 | A=1.6364, Std=0.8788 (Best so far: 0.8015)
+  3/12 | A=0.0000, Std=2.8921 (Best so far: 0.8015)
+  4/12 | A=1.7778, Std=0.9469 (Best so far: 0.8015)
+  5/12 | A=1.1919, Std=0.8174 (Best so far: 0.8015)
+  6/12 | A=1.7172, Std=0.8803 (Best so far: 0.8015)
+  7/12 | A=1.8384, Std=0.9964 (Best so far: 0.8015)
+  8/12 | A=0.0202, Std=2.8712 (Best so far: 0.8015)
+  9/12 | A=1.1313, Std=0.8201 (Best so far: 0.8015)
+  10/12 | A=1.0707, Std=0.8965 (Best so far: 0.8015)
+  11/12 | A=0.0404, Std=2.8821 (Best so far: 0.8015)
+  12/12 | A=1.3131, Std=0.7459 (Best so far: 0.7459)
+
+======================================================================
+✓ ML OPTIMIZATION COMPLETE
+======================================================================
+
+  ML-Optimal A*:       1.3131
+  ML Std Error:        0.7459
+  Mean Error:          -21.0599
+  Total evaluations:   18
+
+  Classical Leland A:  1.3131
+  Classical Std Error: 0.7459
+  Improvement:         0.00%
+======================================================================
+
+  Running 10,000 Monte Carlo simulations...
+  ✓ Complete | BS: 2.9389, Leland: 0.8073, Opt: 0.8073, ML: 0.8088
+
+Running k=0.0200, σ=0.2775...
+  Calibrating Optimized Leland (grid search)...
+
+======================================================================
+                    OPTIMIZING LELAND'S A PARAMETER
+======================================================================
+
+Parameters:
+  S0=100.00, K=100.00, T=1.00, σ=0.2775
+  k=0.0200, dt=0.003968
+  Simulations: 2,000
+  Testing A ∈ [1.526, 2.126] (11 points)
+
+Running optimization...
+  Progress: 5/11 | Current A=1.766, Std=0.8293
+  Progress: 10/11 | Current A=2.066, Std=0.9116
+  Progress: 11/11 | Current A=2.126, Std=0.9534
+
+======================================================================
+✓ OPTIMIZATION COMPLETE
+======================================================================
+
+  Optimal A*:          1.7656
+  Optimal Std Error:   0.8293
+  Mean Error:          -22.9856
+  Mean Trans. Cost:    8.6886
+
+  Classical Leland A:  1.8256
+  Classical Std Error: 0.8415
+  Improvement:         1.45%
+======================================================================
+
+  Calibrating ML-Calibrated Leland (Bayesian)...
+
+======================================================================
+               ML-CALIBRATED LELAND OPTIMIZATION
+                    (Bayesian Optimization + GP)
+======================================================================
+
+Parameters:
+  S0=100.00, K=100.00, T=1.00, σ=0.2775
+  k=0.0200, dt=0.003968
+  Initial exploration: 6 points
+  BO iterations: 12
+  MC sims per eval: 500
+  Acquisition: EI
+
+  Classical Leland A: 1.8256
+
+Phase 1: Initial Random Exploration (6 points)...
+  1/6 | A=0.1472, Std=3.4157
+  2/6 | A=0.8882, Std=1.5702
+  3/6 | A=1.6529, Std=0.8994
+  4/6 | A=0.2317, Std=3.0959
+  5/6 | A=0.0462, Std=3.8452
+  6/6 | A=1.2924, Std=1.1022
+
+Phase 2: Bayesian Optimization (12 iterations)...
+  1/12 | A=1.7374, Std=0.9033 (Best so far: 0.8994)
+  2/12 | A=1.6768, Std=0.8151 (Best so far: 0.8151)
+  3/12 | A=1.1313, Std=1.2774 (Best so far: 0.8151)
+  4/12 | A=0.6465, Std=2.0577 (Best so far: 0.8151)
+  5/12 | A=1.6970, Std=0.8298 (Best so far: 0.8151)
+  6/12 | A=1.8586, Std=0.8264 (Best so far: 0.8151)
+  7/12 | A=1.8182, Std=0.8419 (Best so far: 0.8151)
+  8/12 | A=1.9798, Std=0.9090 (Best so far: 0.8151)
+  9/12 | A=0.4646, Std=2.4517 (Best so far: 0.8151)
+  10/12 | A=1.0101, Std=1.4522 (Best so far: 0.8151)
+  11/12 | A=1.3737, Std=1.0640 (Best so far: 0.8151)
+  12/12 | A=1.9192, Std=0.8294 (Best so far: 0.8151)
+
+======================================================================
+✓ ML OPTIMIZATION COMPLETE
+======================================================================
+
+  ML-Optimal A*:       1.6768
+  ML Std Error:        0.8151
+  Mean Error:          -23.1126
+  Total evaluations:   18
+
+  Classical Leland A:  1.8182
+  Classical Std Error: 0.8419
+  Improvement:         3.18%
+======================================================================
+
+  Running 10,000 Monte Carlo simulations...
+  ✓ Complete | BS: 3.8800, Leland: 0.8549, Opt: 0.8559, ML: 0.8685
+
+================================================================================
+                      RESULTS: Transaction Cost (k) - AAPL
+================================================================================
+
+k        dt         σ        Steps/Y    BS σ       Leland σ   Opt σ      ML σ       Winner    
+----------------------------------------------------------------------------------------------------
+0.0050   0.003968   0.2775   252        1.1525     0.6690     0.6690     0.6689     ML        
+0.0100   0.003968   0.2775   252        2.0176     0.7367     0.7398     0.7427     Leland    
+0.0150   0.003968   0.2775   252        2.9389     0.8073     0.8073     0.8088     Leland    
+0.0200   0.003968   0.2775   252        3.8800     0.8549     0.8559     0.8685     Leland    
+
+✓ Results exported to: sensitivity_k_AAPL.csv
+
+--- Testing Rebalancing Frequency (Δt) for AAPL ---
+
+================================================================================
+                SENSITIVITY TO REBALANCING FREQUENCY (Δt) - AAPL
+================================================================================
+
+Testing dt values: ['0.003968', '0.007937', '0.015873', '0.047619']
+Real market volatility (σ): 0.2775
+Fixed k: 0.0200
+Monte Carlo simulations per dt: 10,000
+
+Running dt=0.003968 (252 steps/year), σ=0.2775...
+  Calibrating Optimized Leland (grid search)...
+
+======================================================================
+                    OPTIMIZING LELAND'S A PARAMETER
+======================================================================
+
+Parameters:
+  S0=100.00, K=100.00, T=1.00, σ=0.2775
+  k=0.0200, dt=0.003968
+  Simulations: 2,000
+  Testing A ∈ [1.526, 2.126] (11 points)
+
+Running optimization...
+  Progress: 5/11 | Current A=1.766, Std=0.8513
+  Progress: 10/11 | Current A=2.066, Std=0.8901
+  Progress: 11/11 | Current A=2.126, Std=0.8965
+
+======================================================================
+✓ OPTIMIZATION COMPLETE
+======================================================================
+
+  Optimal A*:          1.7056
+  Optimal Std Error:   0.8378
+  Mean Error:          -23.0312
+  Mean Trans. Cost:    8.7035
+
+  Classical Leland A:  1.8256
+  Classical Std Error: 0.8382
+  Improvement:         0.05%
+======================================================================
+
+  Calibrating ML-Calibrated Leland (Bayesian)...
+
+======================================================================
+               ML-CALIBRATED LELAND OPTIMIZATION
+                    (Bayesian Optimization + GP)
+======================================================================
+
+Parameters:
+  S0=100.00, K=100.00, T=1.00, σ=0.2775
+  k=0.0200, dt=0.003968
+  Initial exploration: 6 points
+  BO iterations: 12
+  MC sims per eval: 500
+  Acquisition: EI
+
+  Classical Leland A: 1.8256
+
+Phase 1: Initial Random Exploration (6 points)...
+  1/6 | A=0.2920, Std=2.8123
+  2/6 | A=0.0327, Std=3.7860
+  3/6 | A=0.0973, Std=3.5106
+  4/6 | A=1.9807, Std=0.8767
+  5/6 | A=1.2145, Std=1.1386
+  6/6 | A=1.4979, Std=1.0009
+
+Phase 2: Bayesian Optimization (12 iterations)...
+  1/12 | A=2.0000, Std=0.8979 (Best so far: 0.8767)
+  2/12 | A=1.8384, Std=0.7892 (Best so far: 0.7892)
+  3/12 | A=1.8182, Std=0.8105 (Best so far: 0.7892)
+  4/12 | A=0.8283, Std=1.6152 (Best so far: 0.7892)
+  5/12 | A=1.3535, Std=0.9791 (Best so far: 0.7892)
+  6/12 | A=1.8788, Std=0.8820 (Best so far: 0.7892)
+  7/12 | A=1.0505, Std=1.3726 (Best so far: 0.7892)
+  8/12 | A=0.6061, Std=2.1532 (Best so far: 0.7892)
+  9/12 | A=1.4343, Std=0.9648 (Best so far: 0.7892)
+  10/12 | A=0.9495, Std=1.5056 (Best so far: 0.7892)
+  11/12 | A=1.5960, Std=0.8673 (Best so far: 0.7892)
+  12/12 | A=0.4646, Std=2.4618 (Best so far: 0.7892)
+
+======================================================================
+✓ ML OPTIMIZATION COMPLETE
+======================================================================
+
+  ML-Optimal A*:       1.8384
+  ML Std Error:        0.7892
+  Mean Error:          -22.9031
+  Total evaluations:   18
+
+  Classical Leland A:  1.8182
+  Classical Std Error: 0.8105
+  Improvement:         2.63%
+======================================================================
+
+  Running 10,000 Monte Carlo simulations...
+  ✓ Complete | BS: 3.9183, Leland: 0.8634, Opt: 0.8696, ML: 0.8641
+
+Running dt=0.007937 (126 steps/year), σ=0.2775...
+  Calibrating Optimized Leland (grid search)...
+
+======================================================================
+                    OPTIMIZING LELAND'S A PARAMETER
+======================================================================
+
+Parameters:
+  S0=100.00, K=100.00, T=1.00, σ=0.2775
+  k=0.0200, dt=0.007937
+  Simulations: 2,000
+  Testing A ∈ [0.991, 1.591] (11 points)
+
+Running optimization...
+  Progress: 5/11 | Current A=1.231, Std=1.1069
+  Progress: 10/11 | Current A=1.531, Std=1.1220
+  Progress: 11/11 | Current A=1.591, Std=1.1931
+
+======================================================================
+✓ OPTIMIZATION COMPLETE
+======================================================================
+
+  Optimal A*:          1.2909
+  Optimal Std Error:   1.0581
+  Mean Error:          -21.0559
+  Mean Trans. Cost:    6.7299
+
+  Classical Leland A:  1.2909
+  Classical Std Error: 1.0581
+  Improvement:         0.00%
+======================================================================
+
+  Calibrating ML-Calibrated Leland (Bayesian)...
+
+======================================================================
+               ML-CALIBRATED LELAND OPTIMIZATION
+                    (Bayesian Optimization + GP)
+======================================================================
+
+Parameters:
+  S0=100.00, K=100.00, T=1.00, σ=0.2775
+  k=0.0200, dt=0.007937
+  Initial exploration: 6 points
+  BO iterations: 12
+  MC sims per eval: 500
+  Acquisition: EI
+
+  Classical Leland A: 1.2909
+
+Phase 1: Initial Random Exploration (6 points)...
+  1/6 | A=1.6748, Std=1.1247
+  2/6 | A=1.0243, Std=1.1002
+  3/6 | A=0.8843, Std=1.2555
+  4/6 | A=0.8466, Std=1.2696
+  5/6 | A=1.2549, Std=1.0234
+  6/6 | A=0.4101, Std=1.8954
+
+Phase 2: Bayesian Optimization (12 iterations)...
+  1/12 | A=1.1717, Std=1.1145 (Best so far: 1.0234)
+  2/12 | A=1.3939, Std=1.0782 (Best so far: 1.0234)
+  3/12 | A=1.8788, Std=1.2362 (Best so far: 1.0234)
+  4/12 | A=0.0000, Std=2.8647 (Best so far: 1.0234)
+  5/12 | A=0.6465, Std=1.4306 (Best so far: 1.0234)
+  6/12 | A=1.3131, Std=1.1831 (Best so far: 1.0234)
+  7/12 | A=1.4949, Std=1.1333 (Best so far: 1.0234)
+  8/12 | A=1.7576, Std=1.2490 (Best so far: 1.0234)
+  9/12 | A=2.0000, Std=1.3574 (Best so far: 1.0234)
+  10/12 | A=0.2222, Std=2.2728 (Best so far: 1.0234)
+  11/12 | A=1.2323, Std=1.0240 (Best so far: 1.0234)
+  12/12 | A=1.4343, Std=1.1638 (Best so far: 1.0234)
+
+======================================================================
+✓ ML OPTIMIZATION COMPLETE
+======================================================================
+
+  ML-Optimal A*:       1.2549
+  ML Std Error:        1.0234
+  Mean Error:          -21.1614
+  Total evaluations:   18
+
+  Classical Leland A:  1.3131
+  Classical Std Error: 1.1831
+  Improvement:         13.50%
+======================================================================
+
+  Running 10,000 Monte Carlo simulations...
+  ✓ Complete | BS: 2.8683, Leland: 1.1146, Opt: 1.1146, ML: 1.1131
+
+Running dt=0.015873 (63 steps/year), σ=0.2775...
+  Calibrating Optimized Leland (grid search)...
+
+======================================================================
+                    OPTIMIZING LELAND'S A PARAMETER
+======================================================================
+
+Parameters:
+  S0=100.00, K=100.00, T=1.00, σ=0.2775
+  k=0.0200, dt=0.015873
+  Simulations: 2,000
+  Testing A ∈ [0.613, 1.213] (11 points)
+
+Running optimization...
+  Progress: 5/11 | Current A=0.853, Std=1.4008
+  Progress: 10/11 | Current A=1.153, Std=1.4734
+  Progress: 11/11 | Current A=1.213, Std=1.5087
+/Users/Admin/leland_abm_project/.venv/lib/python3.11/site-packages/sklearn/gaussian_process/_gpr.py:670: ConvergenceWarning: lbfgs failed to converge after 4 iteration(s) (status=2):
+ABNORMAL: 
+
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  _check_optimize_result("lbfgs", opt_res)
+
+======================================================================
+✓ OPTIMIZATION COMPLETE
+======================================================================
+
+  Optimal A*:          0.8528
+  Optimal Std Error:   1.4008
+  Mean Error:          -19.6618
+  Mean Trans. Cost:    5.4056
+
+  Classical Leland A:  0.9128
+  Classical Std Error: 1.5230
+  Improvement:         8.02%
+======================================================================
+
+  Calibrating ML-Calibrated Leland (Bayesian)...
+
+======================================================================
+               ML-CALIBRATED LELAND OPTIMIZATION
+                    (Bayesian Optimization + GP)
+======================================================================
+
+Parameters:
+  S0=100.00, K=100.00, T=1.00, σ=0.2775
+  k=0.0200, dt=0.015873
+  Initial exploration: 6 points
+  BO iterations: 12
+  MC sims per eval: 500
+  Acquisition: EI
+
+  Classical Leland A: 0.9128
+
+Phase 1: Initial Random Exploration (6 points)...
+  1/6 | A=1.9423, Std=1.9328
+  2/6 | A=1.4056, Std=1.6783
+  3/6 | A=0.7984, Std=1.5033
+  4/6 | A=1.1379, Std=1.4579
+  5/6 | A=0.0315, Std=2.1775
+  6/6 | A=1.0114, Std=1.4277
+
+Phase 2: Bayesian Optimization (12 iterations)...
+  1/12 | A=1.0101, Std=1.5278 (Best so far: 1.4277)
+  2/12 | A=1.1313, Std=1.5536 (Best so far: 1.4277)
+  3/12 | A=0.8081, Std=1.3853 (Best so far: 1.3853)
+  4/12 | A=0.7879, Std=1.4571 (Best so far: 1.3853)
+  5/12 | A=1.1515, Std=1.6242 (Best so far: 1.3853)
+  6/12 | A=1.0303, Std=1.3702 (Best so far: 1.3702)
+  7/12 | A=1.0505, Std=1.4391 (Best so far: 1.3702)
+  8/12 | A=0.8283, Std=1.4314 (Best so far: 1.3702)
+  9/12 | A=0.8485, Std=1.3982 (Best so far: 1.3702)
+  10/12 | A=0.8687, Std=1.4072 (Best so far: 1.3702)
+  11/12 | A=0.8889, Std=1.3721 (Best so far: 1.3702)
+  12/12 | A=0.9091, Std=1.3448 (Best so far: 1.3448)
+
+======================================================================
+✓ ML OPTIMIZATION COMPLETE
+======================================================================
+
+  ML-Optimal A*:       0.9091
+  ML Std Error:        1.3448
+  Mean Error:          -19.6908
+  Total evaluations:   18
+
+  Classical Leland A:  0.9091
+  Classical Std Error: 1.3448
+  Improvement:         0.00%
+======================================================================
+
+  Running 10,000 Monte Carlo simulations...
+  ✓ Complete | BS: 2.2903, Leland: 1.4531, Opt: 1.4489, ML: 1.4527
+
+Running dt=0.047619 (21 steps/year), σ=0.2775...
+  Calibrating Optimized Leland (grid search)...
+
+======================================================================
+                    OPTIMIZING LELAND'S A PARAMETER
+======================================================================
+
+Parameters:
+  S0=100.00, K=100.00, T=1.00, σ=0.2775
+  k=0.0200, dt=0.047619
+  Simulations: 2,000
+  Testing A ∈ [0.227, 0.827] (11 points)
+
+Running optimization...
+  Progress: 5/11 | Current A=0.467, Std=2.2445
+  Progress: 10/11 | Current A=0.767, Std=2.3553
+  Progress: 11/11 | Current A=0.827, Std=2.3668
+
+======================================================================
+✓ OPTIMIZATION COMPLETE
+======================================================================
+
+  Optimal A*:          0.5870
+  Optimal Std Error:   2.2034
+  Mean Error:          -17.9055
+  Mean Trans. Cost:    3.7181
+
+  Classical Leland A:  0.5270
+  Classical Std Error: 2.2836
+  Improvement:         3.51%
+======================================================================
+
+  Calibrating ML-Calibrated Leland (Bayesian)...
+
+======================================================================
+               ML-CALIBRATED LELAND OPTIMIZATION
+                    (Bayesian Optimization + GP)
+======================================================================
+
+Parameters:
+  S0=100.00, K=100.00, T=1.00, σ=0.2775
+  k=0.0200, dt=0.047619
+  Initial exploration: 6 points
+  BO iterations: 12
+  MC sims per eval: 500
+  Acquisition: EI
+
+  Classical Leland A: 0.5270
+
+Phase 1: Initial Random Exploration (6 points)...
+  1/6 | A=0.8157, Std=2.4506
+  2/6 | A=1.1607, Std=2.5620
+  3/6 | A=1.8478, Std=2.8720
+  4/6 | A=1.0720, Std=2.4103
+  5/6 | A=1.4301, Std=2.6508
+  6/6 | A=1.5077, Std=2.6542
+
+Phase 2: Bayesian Optimization (12 iterations)...
+  1/12 | A=0.9697, Std=2.3344 (Best so far: 2.3344)
+  2/12 | A=0.2626, Std=2.3764 (Best so far: 2.3344)
+  3/12 | A=0.0606, Std=2.4042 (Best so far: 2.3344)
+  4/12 | A=0.4646, Std=2.3703 (Best so far: 2.3344)
+  5/12 | A=0.3636, Std=2.2351 (Best so far: 2.2351)
+  6/12 | A=0.3838, Std=2.2345 (Best so far: 2.2345)
+  7/12 | A=0.0000, Std=2.5198 (Best so far: 2.2345)
+  8/12 | A=0.6667, Std=2.3216 (Best so far: 2.2345)
+  9/12 | A=2.0000, Std=2.9499 (Best so far: 2.2345)
+  10/12 | A=1.6768, Std=2.8074 (Best so far: 2.2345)
+  11/12 | A=0.3838, Std=2.2306 (Best so far: 2.2306)
+  12/12 | A=0.7273, Std=2.3549 (Best so far: 2.2306)
+
+======================================================================
+✓ ML OPTIMIZATION COMPLETE
+======================================================================
+
+  ML-Optimal A*:       0.3838
+  ML Std Error:        2.2306
+  Mean Error:          -18.0353
+  Total evaluations:   18
+
+  Classical Leland A:  0.4646
+  Classical Std Error: 2.3703
+  Improvement:         5.89%
+======================================================================
+
+  Running 10,000 Monte Carlo simulations...
+  ✓ Complete | BS: 2.4765, Leland: 2.3155, Opt: 2.3255, ML: 2.3083
+
+================================================================================
+                   RESULTS: Rebalancing Frequency (Δt) - AAPL
+================================================================================
+
+k        dt         σ        Steps/Y    BS σ       Leland σ   Opt σ      ML σ       Winner    
+----------------------------------------------------------------------------------------------------
+0.0200   0.003968   0.2775   252        3.9183     0.8634     0.8696     0.8641     Leland    
+0.0200   0.007937   0.2775   126        2.8683     1.1146     1.1146     1.1131     ML        
+0.0200   0.015873   0.2775   63         2.2903     1.4531     1.4489     1.4527     Opt       
+0.0200   0.047619   0.2775   21         2.4765     2.3155     2.3255     2.3083     ML        
+
+✓ Results exported to: sensitivity_dt_AAPL.csv
+
+================================================================================
+                       COMPARATIVE SUMMARY ACROSS TICKERS
+================================================================================
+
+Ticker     σ (Vol)      Best Strategy (k)         Best Strategy (dt)       
+--------------------------------------------------------------------------------
+AAPL       0.2775       Leland                    ML                       
+
+✓ Adaptive sensitivity complete for AAPL
+
+================================================================================
+                    ANALYSIS COMPLETE: AAPL
+================================================================================
+
+Time elapsed: 73.0 minutes
+
+Files created for AAPL:
+  ABM Results:
+    - multi_abm_runs_AAPL.csv      (all 30 runs)
+    - multi_abm_summary_AAPL.csv   (statistical summary)
+    - multi_abm_tests_AAPL.csv     (t-tests)
+  Sensitivity Results:
+    - sensitivity_k_AAPL.csv       (transaction cost sensitivity)
+    - sensitivity_dt_AAPL.csv      (rebalancing sensitivity)
+
+================================================================================
+
+
+================================================================================
+                    ALL ANALYSES COMPLETE
+================================================================================
+
+Total tickers analyzed: 1
+Total time: 73.0 minutes (1.2 hours)
+
+All results exported to CSV files
+
+================================================================================
+

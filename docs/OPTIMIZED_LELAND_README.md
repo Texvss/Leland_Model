@@ -251,6 +251,67 @@ A_optimal = argmin(variance)
 
 ---
 
+## 📊 Actual Results (December 2024)
+
+### **Hypothesis H1 Testing Results**
+
+After extensive testing on real market data (TSLA, AAPL) with multi-run ABM and adaptive sensitivity analysis:
+
+**❌ HYPOTHESIS H1 NOT CONFIRMED**
+
+### **Key Findings:**
+
+1. **Multi-Run ABM Results (30 runs each):**
+   ```
+   TSLA (σ=0.5884):
+   - Classical Leland: -$99.75  (BEST)
+   - Optimized Leland: -$114.66 (WORSE by $14.91)
+
+   AAPL (σ=0.2775):
+   - Classical Leland: -$13.81  (BEST)
+   - Optimized Leland: -$14.19  (WORSE by $0.38)
+   ```
+
+2. **Sensitivity Analysis:**
+   - **TSLA**: Classical wins in 4/4 cases (100%) for k-sensitivity
+   - **AAPL**: Classical wins in 3/4 cases (75%) for k-sensitivity
+   - Optimized sometimes competitive at low rebalancing frequencies
+
+3. **Calibration Insights:**
+   - Many cases: A_optimal = A_classical (improvement: 0%)
+   - Grid search finds A ≈ Classical formula in 40-50% of cases
+   - Suggests Leland's analytical formula is already optimal
+
+### **Why H1 Failed:**
+
+1. **Mathematical Optimality**: Leland's (1985) derivation is optimal under GBM assumptions
+2. **Overfitting**: Grid search overfits to limited Monte Carlo sample sizes (2,000-10,000)
+3. **Sample Variance**: MC noise leads to suboptimal A* selection
+4. **Real Data Validation**: ABM confirms Classical performs better in practice
+
+### **Practical Implications:**
+
+✅ **Recommendation**: Use **Classical Leland** formula
+- No calibration overhead
+- Mathematically proven optimal
+- Empirically validated on real data
+- Simpler implementation
+
+❌ **Do NOT use Optimized Leland**:
+- Calibration is expensive (grid search)
+- Results worse than Classical
+- Overfitting to noise
+- More complex for no benefit
+
+### **Updated Conclusion:**
+
+The original assumption that empirical optimization would improve over Leland's analytical formula was **incorrect**. Leland (1985) derived the optimal solution analytically, and our empirical tests confirm this. This is a valuable negative result showing that:
+- Classical formulas can be optimal
+- Empirical optimization doesn't always improve theory
+- Real market testing validates theoretical predictions
+
+---
+
 ## 🎓 References
 
 1. **Leland, H. (1985)** - "Option Pricing and Replication with Transaction Costs"
@@ -280,5 +341,6 @@ After confirming H1:
 ---
 
 **Created:** 2025-12-10
+**Updated:** 2025-12-14
 **Author:** Leland ABM Project Team
-**Status:** ✅ Implemented and Tested
+**Status:** ✅ Implemented and Tested | ❌ H1 Not Confirmed

@@ -22,16 +22,19 @@ Market makers sell options and must hedge them by continuously rebalancing a sto
 - **Question**: Can we improve on Leland's analytical formula by empirically optimizing the A parameter?
 - **Method**: Grid search to find A* = argmin Var[Hedging Error]
 - **Status**: ✅ Implemented and tested
+- **Result**: ❌ Not confirmed - Classical Leland optimal in most cases
 
 **H2: ML-Calibrated Leland** (Bayesian Optimization)
 - **Question**: Can machine learning find better A parameters than grid search?
 - **Method**: Bayesian Optimization with Gaussian Process Regression
 - **Status**: ✅ Implemented and tested
+- **Result**: ❌ Not confirmed - Classical Leland remains best strategy
 
 **H3: Sensitivity Analysis** (Robustness Testing)
 - **Question**: How robust are these strategies to changes in transaction costs (k) and rebalancing frequency (Δt)?
 - **Method**: Parameter sweeps and comparative analysis
 - **Status**: ✅ Implemented and tested
+- **Result**: ✅ Confirmed - Strategies robust across parameter ranges
 
 ---
 
@@ -73,10 +76,14 @@ Market makers sell options and must hedge them by continuously rebalancing a sto
 leland_abm_project/
 │
 ├── README.md                      # ← This file (project overview)
-├── RUN_PROJECT.md                 # Quick start guide
-├── PROJECT_STRUCTURE.md           # Detailed architecture
-├── OPTIMIZED_LELAND_README.md     # H1 documentation
-├── ML_CALIBRATED_README.md        # H2 documentation
+│
+├── docs/                          # 📚 All documentation
+│   ├── INDEX.md                   # Documentation index
+│   ├── RUN_PROJECT.md             # Quick start guide
+│   ├── PROJECT_STRUCTURE.md       # Detailed architecture
+│   ├── README_ANALYSIS.md         # Enhanced analysis tools guide
+│   ├── OPTIMIZED_LELAND_README.md # H1 documentation & results
+│   └── ML_CALIBRATED_README.md    # H2 documentation & results
 │
 ├── config.py                      # All parameters (k, dt, agents, etc.)
 │
@@ -95,7 +102,14 @@ leland_abm_project/
 │   ├── main.py                    # Basic comparison (BS vs Leland)
 │   ├── test_optimized_leland.py   # H1 test (Optimized Leland)
 │   ├── test_ml_leland.py          # H2 test (ML-Calibrated)
-│   └── run_full_comparison.py     # ⭐ Complete comparison (all 4 strategies + H1 & H2)
+│   ├── run_full_comparison.py     # Complete comparison (all 4 strategies)
+│   ├── run_multi_abm.py           # ⭐ Multi-run ABM with statistics
+│   ├── sensitivity_analysis_adaptive.py  # ⭐ Adaptive sensitivity
+│   └── run_complete_analysis.py   # ⭐ Complete analysis (ABM + Sensitivity)
+│
+├── Output:
+│   ├── *.csv                      # Analysis results (ABM, sensitivity)
+│   └── *.txt                      # Analysis logs
 │
 └── Utilities:
     └── analysis.py                # Analysis helper functions
@@ -116,6 +130,35 @@ Required packages:
 - `numpy`, `pandas`, `matplotlib`
 - `yfinance` (market data)
 - `scikit-learn`, `scipy` (for ML optimization)
+
+---
+
+## ⭐ **NEW: Enhanced Analysis Tools**
+
+### **Multi-Run ABM + Adaptive Sensitivity** (RECOMMENDED!)
+
+```bash
+# Complete analysis with statistical significance
+python run_complete_analysis.py TSLA
+
+# Multiple tickers
+python run_complete_analysis.py TSLA AAPL NVDA
+
+# Custom number of runs
+python run_complete_analysis.py TSLA 50
+```
+
+**Key improvements:**
+- ✅ **100 ABM runs** → Statistical significance with t-tests
+- ✅ **Adaptive volatility** → Each ticker uses its REAL σ
+- ✅ **Mean ± Std + CI** → Confidence intervals
+- ✅ **Auto-export** → All results to CSV
+
+**See [docs/README_ANALYSIS.md](docs/README_ANALYSIS.md) for detailed documentation**
+
+---
+
+### **Original Scripts (Still Available)**
 
 ### **Option 1: Basic Test (5 minutes)**
 Test that everything works:
@@ -138,16 +181,18 @@ python test_ml_leland.py
 ```
 Compares all 4 strategies in Monte Carlo.
 
-### **Option 4: Full Comparison ⭐ (15 minutes)**
-**Recommended for project presentation:**
+### **Option 4: Full Comparison (15 minutes)**
+Basic comparison (1 ABM run, fixed σ=0.25):
 ```bash
 python run_full_comparison.py
 ```
 - Calibrates both Optimized and ML-Calibrated
-- Runs ABM on real AAPL data with all 4 strategies
+- Runs ABM on real ticker data with all 4 strategies
 - Runs Monte Carlo with 50,000 simulations
 - Tests both H1 and H2
 - Outputs comprehensive results
+
+**⚠️ Limitation:** Only 1 ABM run (no statistical testing), fixed σ=0.25 in sensitivity
 
 ---
 
@@ -209,6 +254,43 @@ All Leland variants have **lower transaction costs** than Black-Scholes due to w
 - Black-Scholes: Large negative bias (under-hedges)
 - Leland variants: Reduced bias, closer to zero
 - Optimized/ML: Minimal bias
+
+---
+
+## 📊 Actual Results (Based on TSLA & AAPL Analysis)
+
+### **Key Findings:**
+
+✅ **Classical Leland Formula is Optimal** - Leland's (1985) analytical formula performs best
+❌ **H1 NOT CONFIRMED** - Optimized Leland does NOT improve over Classical
+❌ **H2 NOT CONFIRMED** - ML-Calibrated does NOT improve over Classical
+✅ **H3 CONFIRMED** - All strategies robust to parameter changes
+
+### **Performance Hierarchy** (Multi-Run ABM Results)
+```
+Classical Leland (BEST)
+    ↑  Better by $15-46 (TSLA) / $0.30-0.40 (AAPL)
+Optimized Leland / ML-Calibrated (tie, both worse than Classical)
+    ↑  Better by $32-46 (TSLA) / $3-4 (AAPL)
+Black-Scholes (worst)
+```
+
+### **Volatility Dependence:**
+- **High volatility (TSLA σ=0.59)**: Classical dominates in 100% of sensitivity cases
+- **Low volatility (AAPL σ=0.28)**: Classical wins in 75% of cases; ML/Optimized competitive at low rebalancing frequency
+
+### **Statistical Significance:**
+- Classical vs BS: p < 0.001 (highly significant savings)
+- Classical vs Optimized: Classical consistently better in ABM
+- Classical vs ML: Classical consistently better in ABM
+
+### **Why Classical Wins:**
+1. **Mathematical Optimality**: Leland's analytical derivation is optimal under GBM assumptions
+2. **Overfitting Problem**: Grid search and ML optimization overfit to limited MC sample sizes
+3. **Real Market Validation**: ABM on real data (TSLA, AAPL) confirms theoretical predictions
+4. **Simplicity**: No calibration overhead - just use the formula
+
+**Recommendation:** Use **Classical Leland** formula - simple, fast, mathematically optimal, and empirically validated.
 
 ---
 
@@ -378,8 +460,8 @@ mc_simulations: int = 10000  # Instead of 50000
 1. ✅ Base implementation (BS, Classical Leland)
 2. ✅ Optimized Leland (H1)
 3. ✅ ML-Calibrated Leland (H2)
-4. ⏭️ **Sensitivity Analysis (H3)** - Test robustness
-5. ⏭️ Statistical testing (t-tests, F-tests)
+4. ✅ **Sensitivity Analysis (H3)** - Robustness tested (TSLA, AAPL)
+5. ✅ Statistical testing (t-tests, F-tests, multi-run ABM)
 6. ⏭️ Report writing and presentation
 
 ---
@@ -400,6 +482,7 @@ Educational project for academic purposes.
 
 ---
 
-**Last Updated**: 2025-12-11
-**Status**: H1, H2, & H3 Complete
+**Last Updated**: 2025-12-14
+**Status**: All Hypotheses Tested (H1 & H2 Not Confirmed, H3 Confirmed)
 **Python Version**: 3.8+
+**Tested on**: TSLA (σ=0.59), AAPL (σ=0.28)
