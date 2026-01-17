@@ -1,0 +1,779 @@
+
+================================================================================
+Sensitivity Analysis Log - AAPL
+Log file: log/sensitivity_AAPL.txt
+================================================================================
+
+
+================================================================================
+                              ANALYZING AAPL
+================================================================================
+
+Downloading AAPL data...
+
+📊 Downloading AAPL data...
+   Period: 2021-01-01 to 2023-12-31
+✓ Downloaded 753 days
+   Price range: $113.44 - $196.26
+   Realized volatility: 27.75%
+   Realized drift: 13.90%
+
+✓ AAPL volatility: σ = 0.2775
+
+--- Testing Transaction Costs (k) for AAPL ---
+
+================================================================================
+                   SENSITIVITY TO TRANSACTION COST (k) - AAPL
+================================================================================
+
+Testing k values: [0.005, 0.01, 0.015, 0.02]
+Real market volatility (σ): 0.2775
+Fixed dt: 0.003968 (252 steps/year)
+Monte Carlo simulations per k: 10,000
+
+Running k=0.0050, σ=0.2775...
+  Calibrating Optimized Leland (grid search)...
+
+======================================================================
+                    OPTIMIZING LELAND'S A PARAMETER
+======================================================================
+
+Parameters:
+  S0=100.00, K=100.00, T=1.00, σ=0.2775
+  k=0.0050, dt=0.003968
+  Simulations: 2,000
+  Testing A ∈ [0.156, 0.756] (11 points)
+
+Running optimization...
+  Progress: 5/11 | Current A=0.396, Std=0.6581
+  Progress: 10/11 | Current A=0.696, Std=0.7930
+  Progress: 11/11 | Current A=0.756, Std=0.8071
+
+======================================================================
+✓ OPTIMIZATION COMPLETE
+======================================================================
+
+  Optimal A*:          0.3964
+  Optimal Std Error:   0.6581
+  Mean Error:          -16.7219
+  Mean Trans. Cost:    2.5863
+
+  Classical Leland A:  0.4564
+  Classical Std Error: 0.6852
+  Improvement:         3.96%
+======================================================================
+
+  Calibrating ML-Calibrated Leland (Bayesian)...
+
+======================================================================
+               ML-CALIBRATED LELAND OPTIMIZATION
+                    (Bayesian Optimization + GP)
+======================================================================
+
+Parameters:
+  S0=100.00, K=100.00, T=1.00, σ=0.2775
+  k=0.0050, dt=0.003968
+  Initial exploration: 6 points
+  BO iterations: 12
+  MC sims per eval: 500
+  Acquisition: EI
+
+  Classical Leland A: 0.4564
+
+Phase 1: Initial Random Exploration (6 points)...
+  1/6 | A=1.2084, Std=1.1560
+  2/6 | A=1.9022, Std=1.7581
+  3/6 | A=1.8866, Std=1.7810
+  4/6 | A=0.1636, Std=0.8589
+  5/6 | A=1.5499, Std=1.4636
+  6/6 | A=1.6348, Std=1.6385
+
+Phase 2: Bayesian Optimization (12 iterations)...
+  1/12 | A=0.3636, Std=0.6942 (Best so far: 0.6942)
+  2/12 | A=0.5859, Std=0.7070 (Best so far: 0.6942)
+  3/12 | A=0.4646, Std=0.6733 (Best so far: 0.6733)
+  4/12 | A=0.4646, Std=0.6425 (Best so far: 0.6425)
+  5/12 | A=0.0000, Std=1.1547 (Best so far: 0.6425)
+  6/12 | A=0.9091, Std=0.9127 (Best so far: 0.6425)
+  7/12 | A=0.7677, Std=0.8244 (Best so far: 0.6425)
+  8/12 | A=1.3535, Std=1.3485 (Best so far: 0.6425)
+  9/12 | A=1.0505, Std=1.0670 (Best so far: 0.6425)
+  10/12 | A=0.5051, Std=0.6873 (Best so far: 0.6425)
+  11/12 | A=0.4242, Std=0.7180 (Best so far: 0.6425)
+  12/12 | A=0.2828, Std=0.7450 (Best so far: 0.6425)
+
+======================================================================
+✓ ML OPTIMIZATION COMPLETE
+======================================================================
+
+  ML-Optimal A*:       0.4646
+  ML Std Error:        0.6425
+  Mean Error:          -16.6661
+  Total evaluations:   18
+
+  Classical Leland A:  0.4646
+  Classical Std Error: 0.6733
+  Improvement:         4.56%
+======================================================================
+
+  Running 10,000 Monte Carlo simulations...
+  ✓ Complete | BS: 1.1492, Leland: 0.6657, Opt: 0.6719, ML: 0.6661
+
+Running k=0.0100, σ=0.2775...
+  Calibrating Optimized Leland (grid search)...
+
+======================================================================
+                    OPTIMIZING LELAND'S A PARAMETER
+======================================================================
+
+Parameters:
+  S0=100.00, K=100.00, T=1.00, σ=0.2775
+  k=0.0100, dt=0.003968
+  Simulations: 2,000
+  Testing A ∈ [0.613, 1.213] (11 points)
+
+Running optimization...
+  Progress: 5/11 | Current A=0.853, Std=0.7444
+  Progress: 10/11 | Current A=1.153, Std=0.7941
+  Progress: 11/11 | Current A=1.213, Std=0.8269
+
+======================================================================
+✓ OPTIMIZATION COMPLETE
+======================================================================
+
+  Optimal A*:          0.7928
+  Optimal Std Error:   0.7272
+  Mean Error:          -19.0706
+  Mean Trans. Cost:    4.8402
+
+  Classical Leland A:  0.9128
+  Classical Std Error: 0.7278
+  Improvement:         0.09%
+======================================================================
+
+  Calibrating ML-Calibrated Leland (Bayesian)...
+
+======================================================================
+               ML-CALIBRATED LELAND OPTIMIZATION
+                    (Bayesian Optimization + GP)
+======================================================================
+
+Parameters:
+  S0=100.00, K=100.00, T=1.00, σ=0.2775
+  k=0.0100, dt=0.003968
+  Initial exploration: 6 points
+  BO iterations: 12
+  MC sims per eval: 500
+  Acquisition: EI
+
+  Classical Leland A: 0.9128
+
+Phase 1: Initial Random Exploration (6 points)...
+  1/6 | A=0.3624, Std=1.2109
+  2/6 | A=1.8884, Std=1.3825
+  3/6 | A=0.8797, Std=0.7618
+  4/6 | A=0.9270, Std=0.7502
+  5/6 | A=0.9225, Std=0.7170
+  6/6 | A=1.4435, Std=1.0152
+
+Phase 2: Bayesian Optimization (12 iterations)...
+  1/12 | A=0.9091, Std=0.7288 (Best so far: 0.7170)
+  2/12 | A=0.0000, Std=2.1073 (Best so far: 0.7170)
+  3/12 | A=0.0202, Std=1.9479 (Best so far: 0.7170)
+  4/12 | A=0.8485, Std=0.7342 (Best so far: 0.7170)
+  5/12 | A=1.4949, Std=0.9902 (Best so far: 0.7170)
+  6/12 | A=1.5556, Std=1.1015 (Best so far: 0.7170)
+  7/12 | A=0.7879, Std=0.7740 (Best so far: 0.7170)
+  8/12 | A=0.7475, Std=0.7897 (Best so far: 0.7170)
+  9/12 | A=0.0404, Std=1.9161 (Best so far: 0.7170)
+  10/12 | A=0.7677, Std=0.7760 (Best so far: 0.7170)
+  11/12 | A=0.7071, Std=0.7687 (Best so far: 0.7170)
+  12/12 | A=0.6667, Std=0.7779 (Best so far: 0.7170)
+
+======================================================================
+✓ ML OPTIMIZATION COMPLETE
+======================================================================
+
+  ML-Optimal A*:       0.9225
+  ML Std Error:        0.7170
+  Mean Error:          -18.9553
+  Total evaluations:   18
+
+  Classical Leland A:  0.9091
+  Classical Std Error: 0.7288
+  Improvement:         1.62%
+======================================================================
+
+  Running 10,000 Monte Carlo simulations...
+  ✓ Complete | BS: 2.0132, Leland: 0.7301, Opt: 0.7479, ML: 0.7305
+
+Running k=0.0150, σ=0.2775...
+  Calibrating Optimized Leland (grid search)...
+
+======================================================================
+                    OPTIMIZING LELAND'S A PARAMETER
+======================================================================
+
+Parameters:
+  S0=100.00, K=100.00, T=1.00, σ=0.2775
+  k=0.0150, dt=0.003968
+  Simulations: 2,000
+  Testing A ∈ [1.069, 1.669] (11 points)
+
+Running optimization...
+  Progress: 5/11 | Current A=1.309, Std=0.8087
+  Progress: 10/11 | Current A=1.609, Std=0.8501
+  Progress: 11/11 | Current A=1.669, Std=0.8790
+
+======================================================================
+✓ OPTIMIZATION COMPLETE
+======================================================================
+
+  Optimal A*:          1.3692
+  Optimal Std Error:   0.7708
+  Mean Error:          -21.0470
+  Mean Trans. Cost:    6.8466
+
+  Classical Leland A:  1.3692
+  Classical Std Error: 0.7708
+  Improvement:         0.00%
+======================================================================
+
+  Calibrating ML-Calibrated Leland (Bayesian)...
+
+======================================================================
+               ML-CALIBRATED LELAND OPTIMIZATION
+                    (Bayesian Optimization + GP)
+======================================================================
+
+Parameters:
+  S0=100.00, K=100.00, T=1.00, σ=0.2775
+  k=0.0150, dt=0.003968
+  Initial exploration: 6 points
+  BO iterations: 12
+  MC sims per eval: 500
+  Acquisition: EI
+
+  Classical Leland A: 1.3692
+
+Phase 1: Initial Random Exploration (6 points)...
+  1/6 | A=0.3563, Std=1.9384
+  2/6 | A=0.3996, Std=1.8284
+  3/6 | A=1.3315, Std=0.8039
+  4/6 | A=1.9232, Std=1.0115
+  5/6 | A=1.2719, Std=0.8418
+  6/6 | A=0.0358, Std=2.7614
+
+Phase 2: Bayesian Optimization (12 iterations)...
+  1/12 | A=1.5556, Std=0.8169 (Best so far: 0.8039)
+  2/12 | A=1.4343, Std=0.7797 (Best so far: 0.7797)
+  3/12 | A=1.4343, Std=0.7390 (Best so far: 0.7390)
+  4/12 | A=0.8889, Std=1.0209 (Best so far: 0.7390)
+  5/12 | A=2.0000, Std=1.1448 (Best so far: 0.7390)
+  6/12 | A=1.0303, Std=0.8945 (Best so far: 0.7390)
+  7/12 | A=0.6667, Std=1.4030 (Best so far: 0.7390)
+  8/12 | A=1.7778, Std=0.9835 (Best so far: 0.7390)
+  9/12 | A=0.0000, Std=2.8957 (Best so far: 0.7390)
+  10/12 | A=1.4545, Std=0.7830 (Best so far: 0.7390)
+  11/12 | A=1.1313, Std=0.7930 (Best so far: 0.7390)
+  12/12 | A=1.6566, Std=0.8573 (Best so far: 0.7390)
+
+======================================================================
+✓ ML OPTIMIZATION COMPLETE
+======================================================================
+
+  ML-Optimal A*:       1.4343
+  ML Std Error:        0.7390
+  Mean Error:          -21.0196
+  Total evaluations:   18
+
+  Classical Leland A:  1.3315
+  Classical Std Error: 0.8039
+  Improvement:         8.06%
+======================================================================
+
+  Running 10,000 Monte Carlo simulations...
+  ✓ Complete | BS: 2.9336, Leland: 0.7825, Opt: 0.7825, ML: 0.7886
+
+Running k=0.0200, σ=0.2775...
+  Calibrating Optimized Leland (grid search)...
+
+======================================================================
+                    OPTIMIZING LELAND'S A PARAMETER
+======================================================================
+
+Parameters:
+  S0=100.00, K=100.00, T=1.00, σ=0.2775
+  k=0.0200, dt=0.003968
+  Simulations: 2,000
+  Testing A ∈ [1.526, 2.126] (11 points)
+
+Running optimization...
+  Progress: 5/11 | Current A=1.766, Std=0.8731
+  Progress: 10/11 | Current A=2.066, Std=0.8768
+  Progress: 11/11 | Current A=2.126, Std=0.8890
+
+======================================================================
+✓ OPTIMIZATION COMPLETE
+======================================================================
+
+  Optimal A*:          1.5856
+  Optimal Std Error:   0.8376
+  Mean Error:          -23.1628
+  Mean Trans. Cost:    8.8121
+
+  Classical Leland A:  1.8256
+  Classical Std Error: 0.8616
+  Improvement:         2.78%
+======================================================================
+
+  Calibrating ML-Calibrated Leland (Bayesian)...
+
+======================================================================
+               ML-CALIBRATED LELAND OPTIMIZATION
+                    (Bayesian Optimization + GP)
+======================================================================
+
+Parameters:
+  S0=100.00, K=100.00, T=1.00, σ=0.2775
+  k=0.0200, dt=0.003968
+  Initial exploration: 6 points
+  BO iterations: 12
+  MC sims per eval: 500
+  Acquisition: EI
+
+  Classical Leland A: 1.8256
+
+Phase 1: Initial Random Exploration (6 points)...
+  1/6 | A=0.4657, Std=2.3767
+  2/6 | A=0.9749, Std=1.4907
+  3/6 | A=1.7920, Std=0.8495
+  4/6 | A=0.1758, Std=3.0571
+  5/6 | A=0.9847, Std=1.3759
+  6/6 | A=0.9971, Std=1.3994
+
+Phase 2: Bayesian Optimization (12 iterations)...
+  1/12 | A=1.8182, Std=0.8731 (Best so far: 0.8495)
+  2/12 | A=1.7374, Std=0.8369 (Best so far: 0.8369)
+  3/12 | A=1.6970, Std=0.8287 (Best so far: 0.8287)
+  4/12 | A=0.0000, Std=3.7879 (Best so far: 0.8287)
+  5/12 | A=1.6162, Std=0.9156 (Best so far: 0.8287)
+  6/12 | A=1.5556, Std=0.9107 (Best so far: 0.8287)
+  7/12 | A=1.4747, Std=0.9726 (Best so far: 0.8287)
+  8/12 | A=1.3939, Std=0.9757 (Best so far: 0.8287)
+  9/12 | A=1.3131, Std=1.0426 (Best so far: 0.8287)
+  10/12 | A=1.2323, Std=1.1520 (Best so far: 0.8287)
+  11/12 | A=1.8990, Std=0.8377 (Best so far: 0.8287)
+  12/12 | A=1.9596, Std=0.8538 (Best so far: 0.8287)
+
+======================================================================
+✓ ML OPTIMIZATION COMPLETE
+======================================================================
+
+  ML-Optimal A*:       1.6970
+  ML Std Error:        0.8287
+  Mean Error:          -23.0250
+  Total evaluations:   18
+
+  Classical Leland A:  1.8182
+  Classical Std Error: 0.8731
+  Improvement:         5.08%
+======================================================================
+
+  Running 10,000 Monte Carlo simulations...
+  ✓ Complete | BS: 3.8512, Leland: 0.8424, Opt: 0.8815, ML: 0.8508
+
+================================================================================
+                      RESULTS: Transaction Cost (k) - AAPL
+================================================================================
+
+k        dt         σ        Steps/Y    BS σ       Leland σ   Opt σ      ML σ       Winner    
+----------------------------------------------------------------------------------------------------
+0.0050   0.003968   0.2775   252        1.1492     0.6657     0.6719     0.6661     Leland    
+0.0100   0.003968   0.2775   252        2.0132     0.7301     0.7479     0.7305     Leland    
+0.0150   0.003968   0.2775   252        2.9336     0.7825     0.7825     0.7886     Leland    
+0.0200   0.003968   0.2775   252        3.8512     0.8424     0.8815     0.8508     Leland    
+
+✓ Results exported to: output_csv/sensitivity_k_AAPL.csv
+
+--- Testing Rebalancing Frequency (Δt) for AAPL ---
+
+================================================================================
+                SENSITIVITY TO REBALANCING FREQUENCY (Δt) - AAPL
+================================================================================
+
+Testing dt values: ['0.003968', '0.007937', '0.015873', '0.047619']
+Real market volatility (σ): 0.2775
+Fixed k: 0.0200
+Monte Carlo simulations per dt: 10,000
+
+Running dt=0.003968 (252 steps/year), σ=0.2775...
+  Calibrating Optimized Leland (grid search)...
+
+======================================================================
+                    OPTIMIZING LELAND'S A PARAMETER
+======================================================================
+
+Parameters:
+  S0=100.00, K=100.00, T=1.00, σ=0.2775
+  k=0.0200, dt=0.003968
+  Simulations: 2,000
+  Testing A ∈ [1.526, 2.126] (11 points)
+
+Running optimization...
+  Progress: 5/11 | Current A=1.766, Std=0.8450
+  Progress: 10/11 | Current A=2.066, Std=0.8814
+  Progress: 11/11 | Current A=2.126, Std=0.9382
+
+======================================================================
+✓ OPTIMIZATION COMPLETE
+======================================================================
+
+  Optimal A*:          1.7056
+  Optimal Std Error:   0.8369
+  Mean Error:          -23.0463
+  Mean Trans. Cost:    8.7139
+
+  Classical Leland A:  1.8256
+  Classical Std Error: 0.8783
+  Improvement:         4.72%
+======================================================================
+
+  Calibrating ML-Calibrated Leland (Bayesian)...
+
+======================================================================
+               ML-CALIBRATED LELAND OPTIMIZATION
+                    (Bayesian Optimization + GP)
+======================================================================
+
+Parameters:
+  S0=100.00, K=100.00, T=1.00, σ=0.2775
+  k=0.0200, dt=0.003968
+  Initial exploration: 6 points
+  BO iterations: 12
+  MC sims per eval: 500
+  Acquisition: EI
+
+  Classical Leland A: 1.8256
+
+Phase 1: Initial Random Exploration (6 points)...
+  1/6 | A=1.3633, Std=1.0785
+  2/6 | A=1.7872, Std=0.8556
+  3/6 | A=0.5224, Std=2.2346
+  4/6 | A=1.7856, Std=0.8984
+  5/6 | A=0.2613, Std=3.0502
+  6/6 | A=1.1081, Std=1.2739
+
+Phase 2: Bayesian Optimization (12 iterations)...
+  1/12 | A=1.8182, Std=0.9277 (Best so far: 0.8556)
+  2/12 | A=1.7980, Std=0.8205 (Best so far: 0.8205)
+  3/12 | A=1.8384, Std=0.8297 (Best so far: 0.8205)
+  4/12 | A=1.3939, Std=0.9881 (Best so far: 0.8205)
+  5/12 | A=1.4343, Std=0.9617 (Best so far: 0.8205)
+  6/12 | A=1.4747, Std=0.9933 (Best so far: 0.8205)
+  7/12 | A=1.5152, Std=0.9136 (Best so far: 0.8205)
+  8/12 | A=1.5354, Std=0.9436 (Best so far: 0.8205)
+  9/12 | A=1.5758, Std=0.9337 (Best so far: 0.8205)
+  10/12 | A=0.0000, Std=3.6983 (Best so far: 0.8205)
+  11/12 | A=1.6162, Std=0.9093 (Best so far: 0.8205)
+  12/12 | A=1.6566, Std=0.8281 (Best so far: 0.8205)
+
+======================================================================
+✓ ML OPTIMIZATION COMPLETE
+======================================================================
+
+  ML-Optimal A*:       1.7980
+  ML Std Error:        0.8205
+  Mean Error:          -23.0159
+  Total evaluations:   18
+
+  Classical Leland A:  1.8182
+  Classical Std Error: 0.9277
+  Improvement:         11.56%
+======================================================================
+
+  Running 10,000 Monte Carlo simulations...
+  ✓ Complete | BS: 3.8641, Leland: 0.8617, Opt: 0.8677, ML: 0.8610
+
+Running dt=0.007937 (126 steps/year), σ=0.2775...
+  Calibrating Optimized Leland (grid search)...
+
+======================================================================
+                    OPTIMIZING LELAND'S A PARAMETER
+======================================================================
+
+Parameters:
+  S0=100.00, K=100.00, T=1.00, σ=0.2775
+  k=0.0200, dt=0.007937
+  Simulations: 2,000
+  Testing A ∈ [0.991, 1.591] (11 points)
+
+Running optimization...
+  Progress: 5/11 | Current A=1.231, Std=1.0999
+  Progress: 10/11 | Current A=1.531, Std=1.1453
+  Progress: 11/11 | Current A=1.591, Std=1.2076
+
+======================================================================
+✓ OPTIMIZATION COMPLETE
+======================================================================
+
+  Optimal A*:          1.1709
+  Optimal Std Error:   1.0792
+  Mean Error:          -21.1729
+  Mean Trans. Cost:    6.8507
+
+  Classical Leland A:  1.2909
+  Classical Std Error: 1.1181
+  Improvement:         3.48%
+======================================================================
+
+  Calibrating ML-Calibrated Leland (Bayesian)...
+
+======================================================================
+               ML-CALIBRATED LELAND OPTIMIZATION
+                    (Bayesian Optimization + GP)
+======================================================================
+
+Parameters:
+  S0=100.00, K=100.00, T=1.00, σ=0.2775
+  k=0.0200, dt=0.007937
+  Initial exploration: 6 points
+  BO iterations: 12
+  MC sims per eval: 500
+  Acquisition: EI
+
+  Classical Leland A: 1.2909
+
+Phase 1: Initial Random Exploration (6 points)...
+  1/6 | A=1.3641, Std=1.1278
+  2/6 | A=1.6710, Std=1.2237
+  3/6 | A=0.4209, Std=1.8502
+  4/6 | A=0.0245, Std=2.8201
+  5/6 | A=0.8308, Std=1.2642
+  6/6 | A=0.0779, Std=2.5729
+
+Phase 2: Bayesian Optimization (12 iterations)...
+  1/12 | A=1.4949, Std=1.0689 (Best so far: 1.0689)
+  2/12 | A=1.0303, Std=1.1858 (Best so far: 1.0689)
+  3/12 | A=2.0000, Std=1.4036 (Best so far: 1.0689)
+  4/12 | A=1.4747, Std=1.0759 (Best so far: 1.0689)
+  5/12 | A=1.5152, Std=1.1466 (Best so far: 1.0689)
+  6/12 | A=1.2929, Std=1.0926 (Best so far: 1.0689)
+  7/12 | A=1.7576, Std=1.3017 (Best so far: 1.0689)
+  8/12 | A=0.9293, Std=1.1974 (Best so far: 1.0689)
+  9/12 | A=1.1313, Std=1.0590 (Best so far: 1.0590)
+  10/12 | A=1.1919, Std=1.1224 (Best so far: 1.0590)
+  11/12 | A=0.6869, Std=1.3932 (Best so far: 1.0590)
+  12/12 | A=0.2424, Std=2.3262 (Best so far: 1.0590)
+
+======================================================================
+✓ ML OPTIMIZATION COMPLETE
+======================================================================
+
+  ML-Optimal A*:       1.1313
+  ML Std Error:        1.0590
+  Mean Error:          -21.1694
+  Total evaluations:   18
+
+  Classical Leland A:  1.2929
+  Classical Std Error: 1.0926
+  Improvement:         3.08%
+======================================================================
+
+  Running 10,000 Monte Carlo simulations...
+  ✓ Complete | BS: 2.8380, Leland: 1.1007, Opt: 1.1037, ML: 1.1102
+
+Running dt=0.015873 (63 steps/year), σ=0.2775...
+  Calibrating Optimized Leland (grid search)...
+
+======================================================================
+                    OPTIMIZING LELAND'S A PARAMETER
+======================================================================
+
+Parameters:
+  S0=100.00, K=100.00, T=1.00, σ=0.2775
+  k=0.0200, dt=0.015873
+  Simulations: 2,000
+  Testing A ∈ [0.613, 1.213] (11 points)
+
+Running optimization...
+  Progress: 5/11 | Current A=0.853, Std=1.4671
+  Progress: 10/11 | Current A=1.153, Std=1.5377
+  Progress: 11/11 | Current A=1.213, Std=1.5352
+
+======================================================================
+✓ OPTIMIZATION COMPLETE
+======================================================================
+
+  Optimal A*:          0.7328
+  Optimal Std Error:   1.4396
+  Mean Error:          -19.7450
+  Mean Trans. Cost:    5.4922
+
+  Classical Leland A:  0.9128
+  Classical Std Error: 1.4631
+  Improvement:         1.60%
+======================================================================
+
+  Calibrating ML-Calibrated Leland (Bayesian)...
+
+======================================================================
+               ML-CALIBRATED LELAND OPTIMIZATION
+                    (Bayesian Optimization + GP)
+======================================================================
+
+Parameters:
+  S0=100.00, K=100.00, T=1.00, σ=0.2775
+  k=0.0200, dt=0.015873
+  Initial exploration: 6 points
+  BO iterations: 12
+  MC sims per eval: 500
+  Acquisition: EI
+
+  Classical Leland A: 0.9128
+
+Phase 1: Initial Random Exploration (6 points)...
+  1/6 | A=0.2116, Std=1.7699
+  2/6 | A=1.8027, Std=1.7684
+  3/6 | A=0.8604, Std=1.4577
+  4/6 | A=1.0565, Std=1.4516
+  5/6 | A=0.7541, Std=1.4268
+  6/6 | A=0.7593, Std=1.4102
+
+Phase 2: Bayesian Optimization (12 iterations)...
+  1/12 | A=0.8081, Std=1.4867 (Best so far: 1.4102)
+  2/12 | A=0.9091, Std=1.3534 (Best so far: 1.3534)
+  3/12 | A=0.9495, Std=1.3863 (Best so far: 1.3534)
+  4/12 | A=1.1313, Std=1.4683 (Best so far: 1.3534)
+  5/12 | A=1.2323, Std=1.5931 (Best so far: 1.3534)
+  6/12 | A=1.5152, Std=1.6893 (Best so far: 1.3534)
+  7/12 | A=1.0101, Std=1.4586 (Best so far: 1.3534)
+  8/12 | A=0.4848, Std=1.6432 (Best so far: 1.3534)
+  9/12 | A=1.0505, Std=1.4147 (Best so far: 1.3534)
+  10/12 | A=0.9293, Std=1.3496 (Best so far: 1.3496)
+  11/12 | A=0.0000, Std=2.3213 (Best so far: 1.3496)
+  12/12 | A=1.1717, Std=1.5464 (Best so far: 1.3496)
+
+======================================================================
+✓ ML OPTIMIZATION COMPLETE
+======================================================================
+
+  ML-Optimal A*:       0.9293
+  ML Std Error:        1.3496
+  Mean Error:          -19.6638
+  Total evaluations:   18
+
+  Classical Leland A:  0.9091
+  Classical Std Error: 1.3534
+  Improvement:         0.28%
+======================================================================
+
+  Running 10,000 Monte Carlo simulations...
+  ✓ Complete | BS: 2.2874, Leland: 1.4434, Opt: 1.4489, ML: 1.4453
+
+Running dt=0.047619 (21 steps/year), σ=0.2775...
+  Calibrating Optimized Leland (grid search)...
+
+======================================================================
+                    OPTIMIZING LELAND'S A PARAMETER
+======================================================================
+
+Parameters:
+  S0=100.00, K=100.00, T=1.00, σ=0.2775
+  k=0.0200, dt=0.047619
+  Simulations: 2,000
+  Testing A ∈ [0.227, 0.827] (11 points)
+
+Running optimization...
+  Progress: 5/11 | Current A=0.467, Std=2.2884
+  Progress: 10/11 | Current A=0.767, Std=2.3507
+  Progress: 11/11 | Current A=0.827, Std=2.3127
+
+======================================================================
+✓ OPTIMIZATION COMPLETE
+======================================================================
+
+  Optimal A*:          0.4070
+  Optimal Std Error:   2.2731
+  Mean Error:          -17.9698
+  Mean Trans. Cost:    3.7734
+
+  Classical Leland A:  0.5270
+  Classical Std Error: 2.3703
+  Improvement:         4.10%
+======================================================================
+
+  Calibrating ML-Calibrated Leland (Bayesian)...
+
+======================================================================
+               ML-CALIBRATED LELAND OPTIMIZATION
+                    (Bayesian Optimization + GP)
+======================================================================
+
+Parameters:
+  S0=100.00, K=100.00, T=1.00, σ=0.2775
+  k=0.0200, dt=0.047619
+  Initial exploration: 6 points
+  BO iterations: 12
+  MC sims per eval: 500
+  Acquisition: EI
+
+  Classical Leland A: 0.5270
+
+Phase 1: Initial Random Exploration (6 points)...
+  1/6 | A=1.3954, Std=2.7290
+  2/6 | A=1.4361, Std=2.6942
+  3/6 | A=0.2666, Std=2.2338
+  4/6 | A=0.1335, Std=2.1629
+  5/6 | A=1.6983, Std=2.7291
+  6/6 | A=0.3546, Std=2.2517
+
+Phase 2: Bayesian Optimization (12 iterations)...
+  1/12 | A=0.0000, Std=2.3757 (Best so far: 2.1629)
+  2/12 | A=0.5455, Std=2.3786 (Best so far: 2.1629)
+  3/12 | A=0.9293, Std=2.2057 (Best so far: 2.1629)
+  4/12 | A=0.8081, Std=2.4236 (Best so far: 2.1629)
+  5/12 | A=1.0303, Std=2.4771 (Best so far: 2.1629)
+  6/12 | A=0.1818, Std=2.3036 (Best so far: 2.1629)
+  7/12 | A=0.1010, Std=2.4589 (Best so far: 2.1629)
+  8/12 | A=0.1414, Std=2.2758 (Best so far: 2.1629)
+  9/12 | A=0.1212, Std=2.1355 (Best so far: 2.1355)
+  10/12 | A=0.9091, Std=2.2942 (Best so far: 2.1355)
+  11/12 | A=0.9495, Std=2.4040 (Best so far: 2.1355)
+  12/12 | A=0.2424, Std=2.4693 (Best so far: 2.1355)
+
+======================================================================
+✓ ML OPTIMIZATION COMPLETE
+======================================================================
+
+  ML-Optimal A*:       0.1212
+  ML Std Error:        2.1355
+  Mean Error:          -18.0141
+  Total evaluations:   18
+
+  Classical Leland A:  0.5455
+  Classical Std Error: 2.3786
+  Improvement:         10.22%
+======================================================================
+
+  Running 10,000 Monte Carlo simulations...
+  ✓ Complete | BS: 2.4646, Leland: 2.2906, Opt: 2.2844, ML: 2.3681
+
+================================================================================
+                   RESULTS: Rebalancing Frequency (Δt) - AAPL
+================================================================================
+
+k        dt         σ        Steps/Y    BS σ       Leland σ   Opt σ      ML σ       Winner    
+----------------------------------------------------------------------------------------------------
+0.0200   0.003968   0.2775   252        3.8641     0.8617     0.8677     0.8610     ML        
+0.0200   0.007937   0.2775   126        2.8380     1.1007     1.1037     1.1102     Leland    
+0.0200   0.015873   0.2775   63         2.2874     1.4434     1.4489     1.4453     Leland    
+0.0200   0.047619   0.2775   21         2.4646     2.2906     2.2844     2.3681     Opt       
+
+✓ Results exported to: output_csv/sensitivity_dt_AAPL.csv
+
+================================================================================
+✓ Analysis complete for AAPL
+✓ Log saved to: log/sensitivity_AAPL.txt
+================================================================================
+

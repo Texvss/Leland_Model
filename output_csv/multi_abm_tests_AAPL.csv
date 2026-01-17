@@ -1,0 +1,7 @@
+,t_statistic,p_value,mean_diff,cohens_d,significant
+BS_vs_Leland,-inf,0.0,-3.6061700916509594,-705682540886507.1,True
+BS_vs_Optimized,-inf,0.0,-3.2272859857400125,-505231714911546.4,True
+BS_vs_ML,-inf,0.0,-3.269990643325194,-639896412872855.9,True
+Leland_vs_Optimized,inf,0.0,0.3788841059109469,98857196329432.39,True
+Leland_vs_ML,inf,0.0,0.3361794483257654,0,True
+Optimized_vs_ML,-inf,0.0,-0.042704657585181494,-11142358977897.406,True
